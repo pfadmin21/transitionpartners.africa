@@ -571,21 +571,21 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
 .bfc2-panel{display:none;}.bfc2-panel.active{display:block;}
 
 /* stack waterfall */
-.bfc2-waterfall{display:flex;height:48px;gap:1px;border-radius:2px;overflow:hidden;margin-bottom:12px;}
-.bfc2-wf-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;transition:flex .55s cubic-bezier(.22,1,.36,1);overflow:hidden;min-width:0;}
-.bfc2-wf-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;opacity:.85;}
-.bfc2-wf-pct{font-size:10px;font-weight:500;white-space:nowrap;}
-.wf-equity{background:var(--gold);color:var(--ink);}
-.wf-concess{background:#0A7070;color:#fff;}
-.wf-dfi{background:#086480;color:#fff;}
-.wf-carbon{background:#1e7a42;color:#fff;}
-.wf-grant{background:#5a3278;color:#fff;}
-
-.bfc2-stack-legend{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
-.bfc2-sl-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,.03);}
-.bfc2-sl-key{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;color:rgba(255,255,255,.35);text-transform:uppercase;}
-.bfc2-sl-dot{width:8px;height:8px;border-radius:1px;flex-shrink:0;}
-.bfc2-sl-usd{font-family:'EB Garamond',serif;font-size:14px;color:rgba(255,255,255,.6);}
+.bfc2-waterfall{display:none;}
+.bfc2-stack-legend{display:none;}
+/* term-sheet stack rows */
+.bfc2-ts-wrap{display:flex;flex-direction:column;gap:3px;margin-bottom:14px;}
+.bfc2-ts-row{display:grid;grid-template-columns:3px 1fr auto auto;align-items:center;background:rgba(255,255,255,.03);transition:background .2s;}
+.bfc2-ts-row:hover{background:rgba(255,255,255,.06);}
+.bfc2-ts-accent{align-self:stretch;}
+.bfc2-ts-body{padding:11px 14px;display:flex;flex-direction:column;gap:3px;}
+.bfc2-ts-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);}
+.bfc2-ts-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.22);line-height:1.4;}
+.bfc2-ts-bar-wrap{padding:11px 14px 11px 0;width:100px;}
+.bfc2-ts-bar{height:2px;background:rgba(255,255,255,.06);margin-bottom:5px;}
+.bfc2-ts-bar-fill{height:100%;transition:width .6s cubic-bezier(.22,1,.36,1);}
+.bfc2-ts-pct{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.28);}
+.bfc2-ts-amt{font-family:'EB Garamond',serif;font-size:20px;color:#fff;padding:11px 16px 11px 0;min-width:72px;text-align:right;white-space:nowrap;}
 
 .bfc2-loss-wrap{background:rgba(192,154,60,.05);border:1px solid rgba(192,154,60,.12);padding:10px 14px;margin-top:3px;}
 .bfc2-loss-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:7px;}
@@ -1668,8 +1668,7 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
       <!-- PANEL: Capital Stack -->
       <div class="bfc2-panel active" id="bfc2-stack">
         <div class="bfc-chart-title">Blended capital stack · waterfall</div>
-        <div class="bfc2-waterfall" id="bfc2Waterfall"></div>
-        <div class="bfc2-stack-legend" id="bfc2StackLegend"></div>
+        <div class="bfc2-ts-wrap" id="bfc2TermSheet"></div>
         <div class="bfc2-loss-wrap">
           <div class="bfc2-loss-lbl">First-loss protection — fund equity tranche</div>
           <div class="bfc2-loss-bar"><div class="bfc2-loss-fill" id="bfc2LossFill"></div></div>
@@ -1889,19 +1888,36 @@ function bfcUpdate(){
     ...(hasCO2?[{cls:'wf-carbon',pct:carbonSeg,lbl:'Carbon Rev',col:'#1e7a42'}]:[]),
     {cls:'wf-grant',pct:s.grant,lbl:'Grant/TA',col:'#5a3278'},
   ];
-  document.getElementById('bfc2Waterfall').innerHTML=segs.map(sg=>
-    `<div class="bfc2-wf-seg ${sg.cls}" style="flex:${sg.pct}">
-       ${sg.pct>=10?`<div class="bfc2-wf-lbl">${sg.lbl}</div>`:''}
-       <div class="bfc2-wf-pct">${sg.pct}%</div>
-     </div>`
-  ).join('');
+  // Term sheet stack rows
   const totalPrj=Math.round(total);
-  document.getElementById('bfc2StackLegend').innerHTML=segs.map(sg=>
-    `<div class="bfc2-sl-row">
-       <div class="bfc2-sl-key"><div class="bfc2-sl-dot" style="background:${sg.col}"></div>${sg.lbl==='Equity'?'Fund Equity (First Loss)':sg.lbl==='Concessional'?'Concessional Co-Finance':sg.lbl==='DFI Senior'?'DFI Senior Debt':sg.lbl==='Carbon Rev'?'Carbon Credit Revenue (VCS)':'Grant / TA Facility'}</div>
-       <div class="bfc2-sl-usd">${bfcFmt(Math.round(totalPrj*sg.pct/100))}</div>
-     </div>`
-  ).join('');
+  const TRANCHE_META = {
+    'Equity':     {note:'First-loss tranche · absorbed before any senior impairment',       col:'var(--gold)'},
+    'Concessional':{note:'Subordinated co-finance · DFI or development agency source',      col:'#0A7070'},
+    'DFI Senior': {note:'Long-tenor senior debt · IFC / AfDB / Proparco / DEG',             col:'#4a9cc8'},
+    'Carbon Rev': {note:'VCS / REDD+ carbon credit revenue · USD-denominated offtake',      col:'#1e7a42'},
+    'Grant':      {note:'Technical assistance & project preparation facility',               col:'#7a4a9a'},
+  };
+  const TRANCHE_LABELS = {
+    'Equity':'Fund Equity · First Loss','Concessional':'Concessional Co-Finance',
+    'DFI Senior':'DFI Senior Debt','Carbon Rev':'Carbon Credit Revenue (VCS)','Grant':'Grant / TA Facility'
+  };
+  document.getElementById('bfc2TermSheet').innerHTML=segs.map(sg=>{
+    const meta=TRANCHE_META[sg.lbl]||{note:'',col:'rgba(255,255,255,.3)'};
+    const label=TRANCHE_LABELS[sg.lbl]||sg.lbl;
+    const amt=bfcFmt(Math.round(totalPrj*sg.pct/100));
+    return `<div class="bfc2-ts-row">
+      <div class="bfc2-ts-accent" style="background:${meta.col}"></div>
+      <div class="bfc2-ts-body">
+        <div class="bfc2-ts-name">${label}</div>
+        <div class="bfc2-ts-note">${meta.note}</div>
+      </div>
+      <div class="bfc2-ts-bar-wrap">
+        <div class="bfc2-ts-bar"><div class="bfc2-ts-bar-fill" style="width:${sg.pct}%;background:${meta.col}"></div></div>
+        <div class="bfc2-ts-pct">${sg.pct}% of stack</div>
+      </div>
+      <div class="bfc2-ts-amt">${amt}</div>
+    </div>`;
+  }).join('');
   const eqPct=segs[0].pct;
   document.getElementById('bfc2LossFill').style.width=Math.min(eqPct*4,100)+'%';
   document.getElementById('bfc2LossNote').textContent='Fund equity of '+eqPct+'% absorbs the first '+eqPct+'% of project-level losses before concessional and DFI tranches are impaired. This de-risks the senior tranche to investment-grade equivalence, satisfying DFI credit committee requirements.';
