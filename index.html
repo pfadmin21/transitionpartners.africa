@@ -543,6 +543,65 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
   #prog-nav{display:none;}
   #back-top{right:16px;bottom:20px;width:38px;height:38px;}
 }
+
+/* ── ENHANCED BFC v2 ───────────────────────────────────────── */
+.bfc2-tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:20px;}
+.bfc2-tab{padding:9px 18px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
+.bfc2-tab:hover{color:rgba(255,255,255,.65);}
+.bfc2-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.bfc2-panel{display:none;}.bfc2-panel.active{display:block;}
+
+/* stack waterfall */
+.bfc2-waterfall{display:flex;height:48px;gap:1px;border-radius:2px;overflow:hidden;margin-bottom:12px;}
+.bfc2-wf-seg{display:flex;flex-direction:column;align-items:center;justify-content:center;transition:flex .55s cubic-bezier(.22,1,.36,1);overflow:hidden;min-width:0;}
+.bfc2-wf-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;opacity:.85;}
+.bfc2-wf-pct{font-size:10px;font-weight:500;white-space:nowrap;}
+.wf-equity{background:var(--gold);color:var(--ink);}
+.wf-concess{background:#0A7070;color:#fff;}
+.wf-dfi{background:#086480;color:#fff;}
+.wf-carbon{background:#1e7a42;color:#fff;}
+.wf-grant{background:#5a3278;color:#fff;}
+
+.bfc2-stack-legend{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.bfc2-sl-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:rgba(255,255,255,.03);}
+.bfc2-sl-key{display:flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;color:rgba(255,255,255,.35);text-transform:uppercase;}
+.bfc2-sl-dot{width:8px;height:8px;border-radius:1px;flex-shrink:0;}
+.bfc2-sl-usd{font-family:'EB Garamond',serif;font-size:14px;color:rgba(255,255,255,.6);}
+
+.bfc2-loss-wrap{background:rgba(192,154,60,.05);border:1px solid rgba(192,154,60,.12);padding:10px 14px;margin-top:3px;}
+.bfc2-loss-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:7px;}
+.bfc2-loss-bar{height:6px;background:rgba(255,255,255,.06);border-radius:1px;overflow:hidden;}
+.bfc2-loss-fill{height:100%;background:linear-gradient(90deg,var(--gold),rgba(192,154,60,.4));transition:width .55s;}
+.bfc2-loss-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.35);margin-top:6px;line-height:1.5;}
+
+/* j-curve */
+.bfc2-chart-wrap{position:relative;height:180px;margin-bottom:8px;}
+
+/* FX */
+.bfc2-fx-modes{display:flex;gap:2px;margin-bottom:14px;}
+.bfc2-fx-btn{flex:1;padding:8px 6px;text-align:center;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.35);cursor:pointer;transition:.2s;}
+.bfc2-fx-btn:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);}
+.bfc2-fx-btn.active{border-color:var(--teal);color:#5CC8C8;background:rgba(10,112,112,.1);}
+.bfc2-fx-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.3);line-height:1.6;padding:10px 12px;background:rgba(255,255,255,.03);border-left:2px solid rgba(192,154,60,.3);margin-top:10px;}
+
+/* carbon toggle */
+.bfc2-carbon-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(30,122,66,.08);border:1px solid rgba(30,122,66,.2);margin-bottom:14px;cursor:pointer;user-select:none;}
+.bfc2-toggle{width:30px;height:17px;border-radius:9px;background:rgba(255,255,255,.1);position:relative;transition:.2s;flex-shrink:0;}
+.bfc2-toggle::after{content:'';position:absolute;width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,.5);top:2px;left:2px;transition:.22s;}
+.bfc2-toggle.on{background:rgba(30,122,66,.7);}
+.bfc2-toggle.on::after{left:15px;background:#fff;}
+.bfc2-carbon-lbl{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bfc2-carbon-boost{margin-left:auto;font-family:'DM Mono',monospace;font-size:8px;color:#5CC8C8;letter-spacing:1px;}
+
+/* impact */
+.bfc2-impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:14px;}
+.bfc2-impact-card{background:rgba(255,255,255,.04);padding:14px 12px;border-top:2px solid var(--teal);}
+.bfc2-impact-num{font-family:'EB Garamond',serif;font-size:22px;color:#fff;line-height:1;}
+.bfc2-impact-unit{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--gold);margin-left:3px;text-transform:uppercase;}
+.bfc2-impact-desc{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.5px;color:rgba(255,255,255,.28);margin-top:5px;line-height:1.5;text-transform:uppercase;}
+.bfc2-sdg-row{display:flex;gap:4px;flex-wrap:wrap;}
+.bfc2-sdg{padding:4px 9px;background:rgba(10,112,112,.12);border:1px solid rgba(10,112,112,.25);font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:#5CC8C8;text-transform:uppercase;}
+/* ── end enhanced BFC v2 ──────────────────────────────────── */
 </style>
 </head>
 <body>
@@ -950,7 +1009,7 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
           </div>
         </div>
       </div>
-        <a href="mailto:admin@philanthropicfoundation.net?subject=Fund%20Documentation%20Request" class="btn-solid" style="font-size:11px;padding:13px 32px;">Request Fund Documentation</a>
+        <a href="#apply" class="btn-solid" style="font-size:11px;padding:13px 32px;">Request Fund Documentation</a>
       </div>
     </div>
   </div>
@@ -1359,14 +1418,13 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
 
       <!-- BFC CALCULATOR — inline in right column, below map -->
       <div class="bfc-inline rv d2">
-<!-- BLENDED FINANCE CALCULATOR -->
 <div class="bfc-content">
   <div class="bfc-header">
     <div class="bfc-title-block">
       <div class="s-label inv">Blended Finance Calculator</div>
       <h3>Risk &amp; return <em>by market.</em></h3>
     </div>
-    <p class="bfc-desc">Select a target market, set your ticket size, and choose a scenario to see the indicative blended finance stack, projected IRR, and risk profile for that deployment context. All figures are illustrative and market-calibrated.</p>
+    <p class="bfc-desc">Select a target market, set your equity ticket, and choose a scenario to see the full blended capital stack, J-curve, FX sensitivity, risk profile, and impact metrics. All figures are indicative and market-calibrated. Conservative scenario shown by default.</p>
   </div>
 
   <!-- Market pills -->
@@ -1384,10 +1442,10 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
     <!-- LEFT: Inputs -->
     <div class="bfc-inputs">
       <div class="bfc-input-section">
-        <div class="bfc-input-label">Ticket Size</div>
+        <div class="bfc-input-label">Equity Ticket</div>
         <div class="bfc-amount-display"><em id="bfcAmtDisplay">USD 5M</em></div>
-        <input type="range" class="bfc-slider" id="bfcSlider" min="1" max="30" value="5" step="1" oninput="bfcUpdate()">
-        <div class="bfc-range-labels"><span>USD 1M</span><span>USD 15M</span><span>USD 30M</span></div>
+        <input type="range" class="bfc-slider" id="bfcSlider" min="3" max="15" value="5" step="1" oninput="bfcUpdate()">
+        <div class="bfc-range-labels"><span>USD 3M</span><span>USD 9M</span><span>USD 15M</span></div>
       </div>
       <div class="bfc-input-section">
         <div class="bfc-input-label">Return Scenario</div>
@@ -1401,7 +1459,15 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
         <div class="bfc-input-label">Sector Focus</div>
         <div class="bfc-sector-row" id="bfcSectors"></div>
       </div>
-      <div class="bfc-disclaimer">All projections are indicative only and do not constitute a financial offer or investment advice. Return profiles are based on comparable blended finance transactions in the region. Actual returns depend on project performance, FX, and exit conditions.</div>
+
+      <!-- Carbon toggle -->
+      <div class="bfc2-carbon-row" id="bfc2CarbonRow">
+        <div class="bfc2-toggle" id="bfc2Toggle"></div>
+        <span class="bfc2-carbon-lbl">Layer carbon revenue</span>
+        <span class="bfc2-carbon-boost" id="bfc2CarbonBoost">+0.0% IRR</span>
+      </div>
+
+      <div class="bfc-disclaimer">All projections are indicative only and do not constitute a financial offer or investment advice. Returns are based on comparable blended finance transactions in the region. Actual returns depend on project performance, FX, and exit conditions. Impact metrics are per-project estimates scaled to ticket size using project-level benchmarks — not linear extrapolations.</div>
     </div>
 
     <!-- RIGHT: Outputs -->
@@ -1409,18 +1475,18 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
       <!-- KPIs -->
       <div class="bfc-kpi-row">
         <div class="bfc-kpi k-gold">
-          <div class="bfc-kpi-label">Your Equity</div>
+          <div class="bfc-kpi-label">Fund Equity</div>
           <div class="bfc-kpi-val gold" id="bfcKpi1">USD 5M</div>
-          <div class="bfc-kpi-sub">Fund equity deployed</div>
+          <div class="bfc-kpi-sub">First-loss tranche</div>
         </div>
         <div class="bfc-kpi k-blue">
           <div class="bfc-kpi-label">DFI Debt Unlocked</div>
-          <div class="bfc-kpi-val blue" id="bfcKpi2">USD 12M</div>
-          <div class="bfc-kpi-sub" id="bfcKpi2sub">~2.4× leverage</div>
+          <div class="bfc-kpi-val blue" id="bfcKpi2">USD 11M</div>
+          <div class="bfc-kpi-sub" id="bfcKpi2sub">~2.2× leverage</div>
         </div>
         <div class="bfc-kpi k-green">
           <div class="bfc-kpi-label">Total Project Value</div>
-          <div class="bfc-kpi-val green" id="bfcKpi3">USD 20M</div>
+          <div class="bfc-kpi-val green" id="bfcKpi3">USD 18M</div>
           <div class="bfc-kpi-sub">Capital mobilised</div>
         </div>
         <div class="bfc-kpi k-teal">
@@ -1430,39 +1496,58 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
         </div>
       </div>
 
-      <!-- Charts -->
-      <div class="bfc-charts-row">
-        <!-- Capital stack -->
-        <div class="bfc-chart-card">
-          <div class="bfc-chart-title">Capital Stack</div>
-          <div class="bfc-stack-bars">
-            <div class="bfc-stack-seg s-dfi" id="bfcSegDfi" style="width:67%"></div>
-            <div class="bfc-stack-seg s-eq" id="bfcSegEq" style="width:24%"></div>
-            <div class="bfc-stack-seg s-ta" id="bfcSegTa" style="width:9%"></div>
-          </div>
-          <div class="bfc-stack-legend">
-            <div class="bfc-stack-row"><div class="bfc-stack-key"><div class="bfc-stack-dot" style="background:#4a9cc8"></div>DFI Senior Debt</div><div class="bfc-stack-pct" id="bfcPctDfi">67%</div></div>
-            <div class="bfc-stack-row"><div class="bfc-stack-key"><div class="bfc-stack-dot" style="background:var(--gold)"></div>Fund Equity</div><div class="bfc-stack-pct" id="bfcPctEq">24%</div></div>
-            <div class="bfc-stack-row"><div class="bfc-stack-key"><div class="bfc-stack-dot" style="background:#4caf6e"></div>TA Grants</div><div class="bfc-stack-pct" id="bfcPctTa">9%</div></div>
-          </div>
-        </div>
+      <!-- Tab bar -->
+      <div class="bfc2-tab-bar">
+        <div class="bfc2-tab active" onclick="bfc2Tab('stack',this)">Capital Stack</div>
+        <div class="bfc2-tab" onclick="bfc2Tab('jcurve',this)">J-Curve</div>
+        <div class="bfc2-tab" onclick="bfc2Tab('fx',this)">FX Sensitivity</div>
+        <div class="bfc2-tab" onclick="bfc2Tab('risk',this)">Risk Profile</div>
+        <div class="bfc2-tab" onclick="bfc2Tab('impact',this)">Impact</div>
+      </div>
 
-        <!-- IRR timeline -->
-        <div class="bfc-chart-card">
-          <div class="bfc-chart-title">Indicative Net IRR · <span id="bfcScenLabel">Conservative</span></div>
-          <div class="bfc-irr-bars" id="bfcIrrBars">
-            <div class="bfc-irr-col"><div class="bfc-irr-val" id="bfcIrr3">3.2%</div><div class="bfc-irr-bar" id="bfcBar3" style="height:30%;background:rgba(10,112,112,.3)"></div><div class="bfc-irr-yr">Yr 3</div></div>
-            <div class="bfc-irr-col"><div class="bfc-irr-val" id="bfcIrr5">5.8%</div><div class="bfc-irr-bar" id="bfcBar5" style="height:50%;background:rgba(10,112,112,.5)"></div><div class="bfc-irr-yr">Yr 5</div></div>
-            <div class="bfc-irr-col"><div class="bfc-irr-val" id="bfcIrr7">7.4%</div><div class="bfc-irr-bar" id="bfcBar7" style="height:70%;background:rgba(10,112,112,.7)"></div><div class="bfc-irr-yr">Yr 7</div></div>
-            <div class="bfc-irr-col"><div class="bfc-irr-val" id="bfcIrr10">8.9%</div><div class="bfc-irr-bar" id="bfcBar10" style="height:90%;background:var(--teal)"></div><div class="bfc-irr-yr">Yr 10</div></div>
-          </div>
+      <!-- PANEL: Capital Stack -->
+      <div class="bfc2-panel active" id="bfc2-stack">
+        <div class="bfc-chart-title">Blended capital stack · waterfall</div>
+        <div class="bfc2-waterfall" id="bfc2Waterfall"></div>
+        <div class="bfc2-stack-legend" id="bfc2StackLegend"></div>
+        <div class="bfc2-loss-wrap">
+          <div class="bfc2-loss-lbl">First-loss protection — fund equity tranche</div>
+          <div class="bfc2-loss-bar"><div class="bfc2-loss-fill" id="bfc2LossFill"></div></div>
+          <div class="bfc2-loss-note" id="bfc2LossNote"></div>
         </div>
+      </div>
 
-        <!-- Risk matrix -->
-        <div class="bfc-chart-card">
-          <div class="bfc-chart-title">Risk Profile · <span id="bfcRiskMarket">Kenya</span></div>
-          <div class="bfc-risk-items" id="bfcRiskItems"></div>
+      <!-- PANEL: J-Curve -->
+      <div class="bfc2-panel" id="bfc2-jcurve">
+        <div class="bfc-chart-title">Cumulative cash flow profile · J-curve</div>
+        <div class="bfc2-chart-wrap"><canvas id="bfc2JChart" role="img" aria-label="J-curve showing negative cash flows in construction years 0-2, break-even around year 3-4, returning to full capital plus profit by year 7-10"></canvas></div>
+        <div class="bfc2-fx-note" style="border-left-color:rgba(10,112,112,.4);">J-curve reflects construction period (Yrs 0–2), operational ramp (Yrs 2–4), and full cash generation phase. Negative trough is equity deployed pre-revenue. Break-even timing is scenario and sector dependent.</div>
+      </div>
+
+      <!-- PANEL: FX Sensitivity -->
+      <div class="bfc2-panel" id="bfc2-fx">
+        <div class="bfc-chart-title">IRR sensitivity · FX hedging scenario</div>
+        <div class="bfc2-fx-modes">
+          <div class="bfc2-fx-btn active" onclick="bfc2SetFx('hedged',this)">Fully Hedged</div>
+          <div class="bfc2-fx-btn" onclick="bfc2SetFx('partial',this)">Partial Hedge</div>
+          <div class="bfc2-fx-btn" onclick="bfc2SetFx('unhedged',this)">Unhedged</div>
         </div>
+        <div class="bfc2-chart-wrap"><canvas id="bfc2FxChart" role="img" aria-label="Bar chart showing IRR at years 3, 5, 7 and 10 under three FX hedging scenarios"></canvas></div>
+        <div class="bfc2-fx-note" id="bfc2FxNote"></div>
+      </div>
+
+      <!-- PANEL: Risk -->
+      <div class="bfc2-panel" id="bfc2-risk">
+        <div class="bfc-chart-title">Risk profile · <span id="bfcRiskMarket2">Kenya</span></div>
+        <div class="bfc-risk-items" id="bfc2RiskItems"></div>
+      </div>
+
+      <!-- PANEL: Impact -->
+      <div class="bfc2-panel" id="bfc2-impact">
+        <div class="bfc-chart-title">Indicative impact · per deployment at ticket size</div>
+        <div class="bfc2-impact-grid" id="bfc2ImpactGrid"></div>
+        <div class="bfc-chart-title" style="margin-top:12px;margin-bottom:8px;">SDG alignment</div>
+        <div class="bfc2-sdg-row" id="bfc2SdgRow"></div>
       </div>
 
       <!-- Market context strip -->
@@ -1473,13 +1558,13 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
         <div class="bfc-mstrip-div"></div>
         <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs3Val">92%</div><div class="bfc-mstrip-lbl">Renewables Share</div></div>
         <div class="bfc-mstrip-div"></div>
-        <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs4Val">~2.4×</div><div class="bfc-mstrip-lbl">DFI Leverage Ratio</div></div>
+        <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs4Val">~2.2×</div><div class="bfc-mstrip-lbl">DFI Leverage Ratio</div></div>
         <div class="bfc-mstrip-div"></div>
-        <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs5Val">AA</div><div class="bfc-mstrip-lbl">Treaty Coverage</div></div>
-      </div>
+        <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs5Val">45 DTAAs</div><div class="bfc-mstrip-lbl">Treaty Coverage</div></div>
       </div>
     </div>
   </div>
+</div>
       </div><!-- /bfc-inline -->
       </div><!-- /geo-right-col -->
     </div><!-- /geo-top -->
@@ -1489,233 +1574,278 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
 
 
 <script>
-// ── BLENDED FINANCE CALCULATOR ────────────────────────────────
+// ── BLENDED FINANCE CALCULATOR v2 ─────────────────────────────
 const BFC_MARKETS = {
-  kenya: {
-    name: 'Kenya',
-    sectors: ['Solar PV','C&I Solar','Clean Water','Wind','Blue Carbon'],
-    dfiMult: { conservative: 2.2, base: 2.5, upside: 2.8 },
-    taPct:   { conservative: 0.14, base: 0.17, upside: 0.20 },
-    irr: {
-      conservative: [3.2, 5.8, 7.4, 8.9],
-      base:         [4.8, 7.5, 10.2, 12.4],
-      upside:       [6.5, 10.2, 13.8, 16.5]
-    },
-    risk: [
-      { name:'Currency',     val:52, cls:'med' },
-      { name:'Offtake',      val:22, cls:'low' },
-      { name:'Political',    val:35, cls:'low' },
-      { name:'Construction', val:42, cls:'med' },
-      { name:'Regulatory',   val:28, cls:'low' },
-    ],
-    strip: { gap:'$12B', priv:'$4.2B', renew:'92%', lev:'~2.4×', treaty:'45 DTAAs' }
-  },
-  rwanda: {
-    name: 'Rwanda',
-    sectors: ['Off-Grid Solar','Mini-Hydro','Clean Water','Mini-Grids','Clean Cooking'],
-    dfiMult: { conservative: 2.0, base: 2.3, upside: 2.6 },
-    taPct:   { conservative: 0.18, base: 0.21, upside: 0.24 },
-    irr: {
-      conservative: [2.8, 5.2, 6.8, 8.2],
-      base:         [4.2, 7.0, 9.5, 11.5],
-      upside:       [5.8, 9.5, 12.8, 15.5]
-    },
-    risk: [
-      { name:'Currency',     val:48, cls:'med' },
-      { name:'Offtake',      val:18, cls:'low' },
-      { name:'Political',    val:15, cls:'low' },
-      { name:'Construction', val:38, cls:'low' },
-      { name:'Regulatory',   val:20, cls:'low' },
-    ],
-    strip: { gap:'$2.4B', priv:'$0.8B', renew:'52%', lev:'~2.3×', treaty:'45 DTAAs' }
-  },
-  namibia: {
-    name: 'Namibia',
-    sectors: ['Solar PV','Wind','Green H₂','C&I Mining','Coastal Resilience'],
-    dfiMult: { conservative: 2.4, base: 2.8, upside: 3.2 },
-    taPct:   { conservative: 0.12, base: 0.15, upside: 0.18 },
-    irr: {
-      conservative: [3.8, 6.5, 8.8, 10.5],
-      base:         [5.5, 8.8, 11.8, 14.2],
-      upside:       [7.2, 11.5, 15.2, 18.5]
-    },
-    risk: [
-      { name:'Currency',     val:45, cls:'med' },
-      { name:'Offtake',      val:20, cls:'low' },
-      { name:'Political',    val:12, cls:'low' },
-      { name:'Construction', val:40, cls:'med' },
-      { name:'Regulatory',   val:18, cls:'low' },
-    ],
-    strip: { gap:'$8.5B', priv:'$1.6B', renew:'80%', lev:'~2.8×', treaty:'45 DTAAs' }
-  },
-  egypt: {
-    name: 'Egypt',
-    sectors: ['Solar PV','Wind','Desalination','Green H₂','Industrial'],
-    dfiMult: { conservative: 2.3, base: 2.6, upside: 3.0 },
-    taPct:   { conservative: 0.15, base: 0.18, upside: 0.22 },
-    irr: {
-      conservative: [3.5, 6.2, 8.4, 10.2],
-      base:         [5.2, 8.5, 11.5, 13.8],
-      upside:       [7.0, 11.2, 14.8, 17.8]
-    },
-    risk: [
-      { name:'Currency',     val:68, cls:'hi'  },
-      { name:'Offtake',      val:25, cls:'low' },
-      { name:'Political',    val:55, cls:'med' },
-      { name:'Construction', val:35, cls:'low' },
-      { name:'Regulatory',   val:42, cls:'med' },
-    ],
-    strip: { gap:'$22B', priv:'$3.8B', renew:'42%', lev:'~2.6×', treaty:'45 DTAAs' }
-  },
-  madagascar: {
-    name: 'Madagascar',
-    sectors: ['Off-Grid Solar','Blue Carbon','Clean Water','Mini-Hydro','Mangrove'],
-    dfiMult: { conservative: 1.8, base: 2.1, upside: 2.4 },
-    taPct:   { conservative: 0.22, base: 0.26, upside: 0.30 },
-    irr: {
-      conservative: [2.2, 4.5, 6.0, 7.5],
-      base:         [3.8, 6.5, 8.8, 11.0],
-      upside:       [5.2, 9.0, 12.2, 15.0]
-    },
-    risk: [
-      { name:'Currency',     val:72, cls:'hi'  },
-      { name:'Offtake',      val:48, cls:'med' },
-      { name:'Political',    val:65, cls:'hi'  },
-      { name:'Construction', val:58, cls:'med' },
-      { name:'Regulatory',   val:55, cls:'med' },
-    ],
-    strip: { gap:'$3.2B', priv:'$0.3B', renew:'38%', lev:'~2.1×', treaty:'45 DTAAs' }
-  },
-  seychelles: {
-    name: 'Seychelles',
-    sectors: ['Solar PV','Ocean Energy','Desalination','Blue Carbon','Resilience'],
-    dfiMult: { conservative: 2.0, base: 2.3, upside: 2.6 },
-    taPct:   { conservative: 0.16, base: 0.20, upside: 0.24 },
-    irr: {
-      conservative: [3.0, 5.5, 7.2, 8.8],
-      base:         [4.5, 7.2, 9.8, 12.0],
-      upside:       [6.0, 9.8, 13.2, 16.2]
-    },
-    risk: [
-      { name:'Currency',     val:30, cls:'low' },
-      { name:'Offtake',      val:28, cls:'low' },
-      { name:'Political',    val:18, cls:'low' },
-      { name:'Construction', val:45, cls:'med' },
-      { name:'Regulatory',   val:22, cls:'low' },
-    ],
-    strip: { gap:'$0.4B', priv:'$0.12B', renew:'25%', lev:'~2.3×', treaty:'45 DTAAs' }
-  }
+  kenya:{name:'Kenya',sectors:['Solar PV','C&I Solar','Clean Water','Wind','Blue Carbon'],
+    dfiMult:{conservative:2.2,base:2.5,upside:2.8},taPct:{conservative:.14,base:.17,upside:.20},
+    irr:{conservative:[3.2,5.8,7.4,8.9],base:[4.8,7.5,10.2,12.4],upside:[6.5,10.2,13.8,16.5]},
+    stack:{equity:17,concess:14,dfi:65,grant:4},
+    carbonBoost:{conservative:.6,base:.9,upside:1.2},carbonMarkets:true,
+    fxAdj:{hedged:[0,0,0,0],partial:[-.4,-.7,-1.0,-1.2],unhedged:[-1.1,-2.0,-2.8,-3.5]},
+    fxNote:'KES has depreciated ~8% p.a. vs USD (5-yr avg). Forward contracts available via local banks at ~2–3% annual cost. Partial hedge recommended for 7yr+ tenors. USD-denominated offtake from Safaricom and multinationals provides partial natural hedge.',
+    risk:[{name:'Currency',val:52,cls:'med'},{name:'Offtake',val:22,cls:'low'},{name:'Political',val:35,cls:'low'},{name:'Construction',val:42,cls:'med'},{name:'Regulatory',val:28,cls:'low'}],
+    impact:{mw:[6,8,11],hh:[18000,24000,31000],co2:[13800,18400,24200],jobs:[260,340,430],water:0,carbon:0},
+    sdgs:['SDG 7 Energy','SDG 13 Climate','SDG 8 Jobs','SDG 9 Infrastructure'],
+    strip:{gap:'$12B',priv:'$4.2B',renew:'92%',lev:'~2.4×',treaty:'45 DTAAs'}},
+  rwanda:{name:'Rwanda',sectors:['Off-Grid Solar','Mini-Hydro','Clean Water','Mini-Grids','Clean Cooking'],
+    dfiMult:{conservative:2.0,base:2.3,upside:2.6},taPct:{conservative:.18,base:.21,upside:.24},
+    irr:{conservative:[2.8,5.2,6.8,8.2],base:[4.2,7.0,9.5,11.5],upside:[5.8,9.5,12.8,15.5]},
+    stack:{equity:21,concess:16,dfi:58,grant:5},
+    carbonBoost:{conservative:.5,base:.7,upside:1.0},carbonMarkets:false,
+    fxAdj:{hedged:[0,0,0,0],partial:[-.3,-.5,-.8,-1.0],unhedged:[-.9,-1.6,-2.3,-2.9]},
+    fxNote:'RWF is a managed float — relatively stable vs USD. Forward contracts available via Bank of Kigali and KCB Rwanda at ~2% p.a. Low FX volatility is a key Rwanda investment advantage vs regional peers.',
+    risk:[{name:'Currency',val:48,cls:'med'},{name:'Offtake',val:18,cls:'low'},{name:'Political',val:15,cls:'low'},{name:'Construction',val:38,cls:'low'},{name:'Regulatory',val:20,cls:'low'}],
+    impact:{mw:[3,5,7],hh:[12000,18000,25000],co2:[8200,12200,16800],jobs:[150,210,290],water:[60000,85000,115000],carbon:0},
+    sdgs:['SDG 6 Water','SDG 7 Energy','SDG 13 Climate','SDG 3 Health'],
+    strip:{gap:'$2.4B',priv:'$0.8B',renew:'52%',lev:'~2.3×',treaty:'45 DTAAs'}},
+  namibia:{name:'Namibia',sectors:['Solar PV','Wind','Green H₂','C&I Mining','Coastal Resilience'],
+    dfiMult:{conservative:2.4,base:2.8,upside:3.2},taPct:{conservative:.12,base:.15,upside:.18},
+    irr:{conservative:[3.8,6.5,8.8,10.5],base:[5.5,8.8,11.8,14.2],upside:[7.2,11.5,15.2,18.5]},
+    stack:{equity:15,concess:12,dfi:68,grant:5},
+    carbonBoost:{conservative:.3,base:.5,upside:.8},carbonMarkets:true,
+    fxAdj:{hedged:[0,0,0,0],partial:[-.5,-.8,-1.1,-1.4],unhedged:[-1.4,-2.4,-3.3,-4.2]},
+    fxNote:'NAD is pegged 1:1 to ZAR. Rand hedging via JSE derivatives. ZAR/USD volatility ~12% p.a. Green H₂ and mining C&I offtake typically EUR or USD-denominated — providing a natural hedge for export-facing projects.',
+    risk:[{name:'Currency',val:45,cls:'med'},{name:'Offtake',val:20,cls:'low'},{name:'Political',val:12,cls:'low'},{name:'Construction',val:40,cls:'med'},{name:'Regulatory',val:18,cls:'low'}],
+    impact:{mw:[10,14,19],hh:[0,0,0],co2:[20400,28600,38500],jobs:[380,520,690],water:0,carbon:[28000,42000,58000]},
+    sdgs:['SDG 7 Energy','SDG 13 Climate','SDG 8 Jobs','SDG 17 Partnerships'],
+    strip:{gap:'$8.5B',priv:'$1.6B',renew:'80%',lev:'~2.8×',treaty:'45 DTAAs'}},
+  egypt:{name:'Egypt',sectors:['Solar PV','Wind','Desalination','Green H₂','Industrial'],
+    dfiMult:{conservative:2.3,base:2.6,upside:3.0},taPct:{conservative:.15,base:.18,upside:.22},
+    irr:{conservative:[3.5,6.2,8.4,10.2],base:[5.2,8.5,11.5,13.8],upside:[7.0,11.2,14.8,17.8]},
+    stack:{equity:16,concess:13,dfi:65,grant:6},
+    carbonBoost:{conservative:.4,base:.6,upside:.9},carbonMarkets:false,
+    fxAdj:{hedged:[0,0,0,0],partial:[-.8,-1.3,-1.8,-2.2],unhedged:[-2.2,-3.8,-5.2,-6.5]},
+    fxNote:'EGP has experienced major devaluations (2016, 2022–23). Forward market is liquid but costly at 4–6% p.a. USD-denominated offtake is strongly preferred. EU-facing H₂ projects offer natural EUR hedge via pipeline agreements.',
+    risk:[{name:'Currency',val:68,cls:'hi'},{name:'Offtake',val:25,cls:'low'},{name:'Political',val:55,cls:'med'},{name:'Construction',val:35,cls:'low'},{name:'Regulatory',val:42,cls:'med'}],
+    impact:{mw:[13,18,24],hh:[36000,52000,70000],co2:[26000,38000,51000],jobs:[490,680,900],water:0,carbon:0},
+    sdgs:['SDG 7 Energy','SDG 13 Climate','SDG 8 Jobs','SDG 11 Cities'],
+    strip:{gap:'$22B',priv:'$3.8B',renew:'42%',lev:'~2.6×',treaty:'45 DTAAs'}},
+  madagascar:{name:'Madagascar',sectors:['Off-Grid Solar','Blue Carbon','Clean Water','Mini-Hydro','Mangrove'],
+    dfiMult:{conservative:1.8,base:2.1,upside:2.4},taPct:{conservative:.22,base:.26,upside:.30},
+    irr:{conservative:[2.2,4.5,6.0,7.5],base:[3.8,6.5,8.8,11.0],upside:[5.2,9.0,12.2,15.0]},
+    stack:{equity:24,concess:20,dfi:48,grant:8},
+    carbonBoost:{conservative:1.2,base:1.8,upside:2.5},carbonMarkets:true,
+    fxAdj:{hedged:[0,0,0,0],partial:[-.5,-.9,-1.2,-1.6],unhedged:[-1.5,-2.7,-3.7,-4.8]},
+    fxNote:'MGA is thinly traded with very limited hedging instruments. USD/EUR-denominated carbon credit revenue (VCS/REDD+) provides meaningful natural protection for nature-based projects. Grant layering can substitute for costly hedges in early-stage transactions.',
+    risk:[{name:'Currency',val:72,cls:'hi'},{name:'Offtake',val:48,cls:'med'},{name:'Political',val:65,cls:'hi'},{name:'Construction',val:58,cls:'med'},{name:'Regulatory',val:55,cls:'med'}],
+    impact:{mw:[2,3,4],hh:[8000,12000,17000],co2:[5600,8200,11500],jobs:[130,180,240],water:[30000,45000,62000],carbon:[60000,95000,135000]},
+    sdgs:['SDG 15 Ecosystems','SDG 13 Climate','SDG 6 Water','SDG 1 Poverty'],
+    strip:{gap:'$3.2B',priv:'$0.3B',renew:'38%',lev:'~2.1×',treaty:'45 DTAAs'}},
+  seychelles:{name:'Seychelles',sectors:['Solar PV','Ocean Energy','Desalination','Blue Carbon','Resilience'],
+    dfiMult:{conservative:2.0,base:2.3,upside:2.6},taPct:{conservative:.16,base:.20,upside:.24},
+    irr:{conservative:[3.0,5.5,7.2,8.8],base:[4.5,7.2,9.8,12.0],upside:[6.0,9.8,13.2,16.2]},
+    stack:{equity:19,concess:15,dfi:58,grant:8},
+    carbonBoost:{conservative:.9,base:1.4,upside:2.0},carbonMarkets:true,
+    fxAdj:{hedged:[0,0,0,0],partial:[-.2,-.4,-.6,-.8],unhedged:[-.7,-1.3,-1.9,-2.5]},
+    fxNote:'SCR is effectively USD-pegged in practice. Lowest FX risk across all TAP I markets. Blue bond and VCS carbon structures are USD-denominated. Most favourable currency environment for return preservation.',
+    risk:[{name:'Currency',val:30,cls:'low'},{name:'Offtake',val:28,cls:'low'},{name:'Political',val:18,cls:'low'},{name:'Construction',val:45,cls:'med'},{name:'Regulatory',val:22,cls:'low'}],
+    impact:{mw:[3,4,5],hh:[5000,8000,12000],co2:[6800,9800,13500],jobs:[85,120,165],water:0,carbon:[24000,38000,55000]},
+    sdgs:['SDG 14 Ocean','SDG 7 Energy','SDG 13 Climate','SDG 17 Partnerships'],
+    strip:{gap:'$0.4B',priv:'$0.12B',renew:'25%',lev:'~2.3×',treaty:'45 DTAAs'}}
 };
 
-let bfcMarket = 'kenya';
-let bfcScenario = 'conservative';
-let bfcSector = 0;
+let bfcMarket='kenya',bfcScenario='conservative',bfcSector=0,bfc2CarbonOn=false,bfc2FxMode='hedged';
+let bfc2JObj=null,bfc2FxObj=null;
+const BFC_SCEN_IDX={conservative:0,base:1,upside:2};
 
-function bfcFmt(n) {
-  return n >= 1000 ? 'USD ' + (n/1000).toFixed(1) + 'B' : 'USD ' + Math.round(n) + 'M';
+function bfcFmt(n){return n>=1000?'USD '+(n/1000).toFixed(1)+'B':'USD '+Math.round(n)+'M';}
+
+function bfcSelectMarket(key,el){
+  bfcMarket=key;
+  document.querySelectorAll('.bfc-pill:not(.domicile)').forEach(p=>p.classList.remove('active'));
+  el.classList.add('active');bfcSector=0;bfcRenderSectors();bfcUpdate();
 }
-
-function bfcSelectMarket(key, el) {
-  bfcMarket = key;
-  document.querySelectorAll('.bfc-pill:not(.domicile)').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-  bfcSector = 0;
-  bfcRenderSectors();
-  bfcUpdate();
+function bfcSetScen(s,el){
+  bfcScenario=s;
+  document.querySelectorAll('.bfc-scen').forEach(e=>e.classList.remove('active'));
+  el.classList.add('active');bfcUpdate();
 }
-
-function bfcSetScen(s, el) {
-  bfcScenario = s;
-  document.querySelectorAll('.bfc-scen').forEach(e => e.classList.remove('active'));
-  el.classList.add('active');
-  bfcUpdate();
-}
-
-function bfcRenderSectors() {
-  const m = BFC_MARKETS[bfcMarket];
-  const el = document.getElementById('bfcSectors');
-  el.innerHTML = m.sectors.map((s, i) =>
+function bfcRenderSectors(){
+  const m=BFC_MARKETS[bfcMarket];
+  document.getElementById('bfcSectors').innerHTML=m.sectors.map((s,i)=>
     `<div class="bfc-sec${i===bfcSector?' active':''}" onclick="bfcPickSector(${i},this)">${s}</div>`
   ).join('');
 }
-
-function bfcPickSector(i, el) {
-  bfcSector = i;
-  document.querySelectorAll('.bfc-sec').forEach(e => e.classList.remove('active'));
-  el.classList.add('active');
-  bfcUpdate();
+function bfcPickSector(i,el){
+  bfcSector=i;document.querySelectorAll('.bfc-sec').forEach(e=>e.classList.remove('active'));el.classList.add('active');bfcUpdate();
 }
 
-function bfcUpdate() {
-  const m   = BFC_MARKETS[bfcMarket];
-  const sc  = bfcScenario;
-  const amt = parseInt(document.getElementById('bfcSlider').value);
+// Carbon toggle
+document.getElementById('bfc2CarbonRow').addEventListener('click',()=>{
+  bfc2CarbonOn=!bfc2CarbonOn;
+  document.getElementById('bfc2Toggle').className='bfc2-toggle'+(bfc2CarbonOn?' on':'');
+  bfcUpdate();
+});
 
-  // Update display
-  document.getElementById('bfcAmtDisplay').textContent = 'USD ' + amt + 'M';
+function bfc2Tab(id,el){
+  document.querySelectorAll('.bfc2-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.bfc2-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('bfc2-'+id).classList.add('active');
+  el.classList.add('active');
+  if(id==='jcurve')bfc2DrawJ();
+  if(id==='fx')bfc2DrawFx();
+}
+function bfc2SetFx(m,el){
+  bfc2FxMode=m;
+  document.querySelectorAll('.bfc2-fx-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');bfc2DrawFx();
+}
 
-  const dfi  = amt * m.dfiMult[sc];
-  const ta   = amt * m.taPct[sc];
-  const total = amt + dfi + ta;
-  const sum   = dfi + amt + ta;
+function bfcGetIrr(scIdx){
+  const m=BFC_MARKETS[bfcMarket];const sc=['conservative','base','upside'][scIdx];
+  return m.irr[sc].map((v,i)=>{
+    const carbon=bfc2CarbonOn&&m.carbonMarkets?(m.carbonBoost[sc]*(i+1)/4):0;
+    return +(v+carbon).toFixed(2);
+  });
+}
+
+function bfcUpdate(){
+  const m=BFC_MARKETS[bfcMarket];const sc=bfcScenario;const si=BFC_SCEN_IDX[sc];
+  const amt=parseInt(document.getElementById('bfcSlider').value);
+  document.getElementById('bfcAmtDisplay').textContent='USD '+amt+'M';
+
+  const dfi=amt*m.dfiMult[sc];const ta=amt*m.taPct[sc];const total=amt+dfi+ta;
+  const irrs=bfcGetIrr(si);const irr10=irrs[3];
+
+  // Carbon boost label
+  const boostVal=bfc2CarbonOn&&m.carbonMarkets?m.carbonBoost[sc]:0;
+  document.getElementById('bfc2CarbonBoost').textContent=m.carbonMarkets?(bfc2CarbonOn?'+'+boostVal.toFixed(1)+'% IRR':'+'+m.carbonBoost[sc].toFixed(1)+'% if enabled'):'Not applicable';
 
   // KPIs
-  document.getElementById('bfcKpi1').textContent = bfcFmt(amt);
-  document.getElementById('bfcKpi2').textContent = bfcFmt(dfi);
-  document.getElementById('bfcKpi2sub').textContent = '~' + m.dfiMult[sc].toFixed(1) + '× leverage';
-  document.getElementById('bfcKpi3').textContent = bfcFmt(total);
-  const irr10 = m.irr[sc][3];
-  document.getElementById('bfcKpi4').textContent = irr10.toFixed(1) + '%';
-  document.getElementById('bfcKpi4sub').textContent = sc.charAt(0).toUpperCase() + sc.slice(1) + ' scenario';
+  document.getElementById('bfcKpi1').textContent=bfcFmt(amt);
+  document.getElementById('bfcKpi2').textContent=bfcFmt(Math.round(dfi));
+  document.getElementById('bfcKpi2sub').textContent='~'+m.dfiMult[sc].toFixed(1)+'× leverage';
+  document.getElementById('bfcKpi3').textContent=bfcFmt(Math.round(total));
+  document.getElementById('bfcKpi4').textContent=irr10.toFixed(1)+'%';
+  document.getElementById('bfcKpi4sub').textContent=sc.charAt(0).toUpperCase()+sc.slice(1)+' scenario';
 
-  // Stack
-  const dPct = (dfi/sum*100).toFixed(1), ePct = (amt/sum*100).toFixed(1), tPct = (ta/sum*100).toFixed(1);
-  document.getElementById('bfcSegDfi').style.width = dPct + '%';
-  document.getElementById('bfcSegEq').style.width  = ePct + '%';
-  document.getElementById('bfcSegTa').style.width  = tPct + '%';
-  document.getElementById('bfcPctDfi').textContent = dPct + '%';
-  document.getElementById('bfcPctEq').textContent  = ePct + '%';
-  document.getElementById('bfcPctTa').textContent  = tPct + '%';
+  // Stack waterfall
+  const s=m.stack;const hasCO2=bfc2CarbonOn&&m.carbonMarkets;
+  const carbonSeg=hasCO2?4:0;
+  const segs=[
+    {cls:'wf-equity',pct:s.equity-(hasCO2?2:0),lbl:'Equity',col:'var(--gold)'},
+    {cls:'wf-concess',pct:s.concess,lbl:'Concessional',col:'#0A7070'},
+    {cls:'wf-dfi',pct:s.dfi-(hasCO2?2:0),lbl:'DFI Senior',col:'#086480'},
+    ...(hasCO2?[{cls:'wf-carbon',pct:carbonSeg,lbl:'Carbon Rev',col:'#1e7a42'}]:[]),
+    {cls:'wf-grant',pct:s.grant,lbl:'Grant/TA',col:'#5a3278'},
+  ];
+  document.getElementById('bfc2Waterfall').innerHTML=segs.map(sg=>
+    `<div class="bfc2-wf-seg ${sg.cls}" style="flex:${sg.pct}">
+       <div class="bfc2-wf-lbl">${sg.lbl}</div>
+       <div class="bfc2-wf-pct">${sg.pct}%</div>
+     </div>`
+  ).join('');
+  const totalPrj=Math.round(total);
+  document.getElementById('bfc2StackLegend').innerHTML=segs.map(sg=>
+    `<div class="bfc2-sl-row">
+       <div class="bfc2-sl-key"><div class="bfc2-sl-dot" style="background:${sg.col}"></div>${sg.lbl==='Equity'?'Fund Equity (First Loss)':sg.lbl==='Concessional'?'Concessional Co-Finance':sg.lbl==='DFI Senior'?'DFI Senior Debt':sg.lbl==='Carbon Rev'?'Carbon Credit Revenue (VCS)':'Grant / TA Facility'}</div>
+       <div class="bfc2-sl-usd">${bfcFmt(Math.round(totalPrj*sg.pct/100))}</div>
+     </div>`
+  ).join('');
+  const eqPct=segs[0].pct;
+  document.getElementById('bfc2LossFill').style.width=Math.min(eqPct*4,100)+'%';
+  document.getElementById('bfc2LossNote').textContent='Fund equity of '+eqPct+'% absorbs the first '+eqPct+'% of project-level losses before concessional and DFI tranches are impaired. This de-risks the senior tranche to investment-grade equivalence, satisfying DFI credit committee requirements.';
 
-  // IRR bars
-  const irrVals = m.irr[sc];
-  const maxIrr  = Math.max(...irrVals);
-  const years = [3,5,7,10];
-  irrVals.forEach((v, i) => {
-    const yr = years[i];
-    document.getElementById('bfcIrr'+yr).textContent = v.toFixed(1) + '%';
-    const pct = (v/maxIrr * 80 + 10);
-    const bar = document.getElementById('bfcBar'+yr);
-    bar.style.height = pct + '%';
-    const alpha = 0.3 + (i/3) * 0.7;
-    bar.style.background = `rgba(10,112,112,${alpha.toFixed(2)})`;
-    if (i === 3) bar.style.background = 'var(--teal)';
-  });
-  document.getElementById('bfcScenLabel').textContent = sc.charAt(0).toUpperCase() + sc.slice(1);
-
-  // Risk items
-  document.getElementById('bfcRiskMarket').textContent = m.name;
-  const rEl = document.getElementById('bfcRiskItems');
-  rEl.innerHTML = m.risk.map(r =>
+  // Risk
+  document.getElementById('bfcRiskMarket2').textContent=m.name;
+  document.getElementById('bfc2RiskItems').innerHTML=m.risk.map(r=>
     `<div class="bfc-risk-item">
-      <div class="bfc-risk-name">${r.name}</div>
-      <div class="bfc-risk-track"><div class="bfc-risk-fill ${r.cls}" style="width:${r.val}%"></div></div>
-      <div class="bfc-risk-score">${r.val < 30 ? 'Low' : r.val < 60 ? 'Med' : 'High'}</div>
-    </div>`
+       <div class="bfc-risk-name">${r.name}</div>
+       <div class="bfc-risk-track"><div class="bfc-risk-fill ${r.cls}" style="width:${r.val}%"></div></div>
+       <div class="bfc-risk-score">${r.val<30?'Low':r.val<60?'Med':'High'}</div>
+     </div>`
   ).join('');
 
+  // Impact — use scenario index for calibrated (not linear) values
+  const imp=m.impact;
+  const items=[];
+  if(imp.mw&&imp.mw[si])items.push({num:imp.mw[si],unit:'MW',desc:'Installed renewable capacity'});
+  if(imp.hh&&imp.hh[si])items.push({num:imp.hh[si].toLocaleString(),unit:'HH',desc:'Households with clean energy'});
+  if(imp.co2&&imp.co2[si])items.push({num:imp.co2[si].toLocaleString(),unit:'tCO₂/yr',desc:'Annual emissions avoided'});
+  if(imp.jobs&&imp.jobs[si])items.push({num:imp.jobs[si].toLocaleString(),unit:'Jobs',desc:'Direct & indirect employment'});
+  if(imp.water&&imp.water[si])items.push({num:imp.water[si].toLocaleString(),unit:'People',desc:'Improved water access'});
+  if(imp.carbon&&imp.carbon[si])items.push({num:imp.carbon[si].toLocaleString(),unit:'tCO₂e',desc:'Nature-based carbon credits (VCS)'});
+  document.getElementById('bfc2ImpactGrid').innerHTML=items.slice(0,6).map(i=>
+    `<div class="bfc2-impact-card">
+       <div class="bfc2-impact-num">${i.num}<span class="bfc2-impact-unit">${i.unit}</span></div>
+       <div class="bfc2-impact-desc">${i.desc}</div>
+     </div>`
+  ).join('');
+  document.getElementById('bfc2SdgRow').innerHTML=m.sdgs.map(s=>`<div class="bfc2-sdg">${s}</div>`).join('');
+
   // Market strip
-  const st = m.strip;
-  document.getElementById('bfcMs1Val').textContent = st.gap;
-  document.getElementById('bfcMs2Val').textContent = st.priv;
-  document.getElementById('bfcMs3Val').textContent = st.renew;
-  document.getElementById('bfcMs4Val').textContent = st.lev;
-  document.getElementById('bfcMs5Val').textContent = st.treaty;
+  const st=m.strip;
+  document.getElementById('bfcMs1Val').textContent=st.gap;
+  document.getElementById('bfcMs2Val').textContent=st.priv;
+  document.getElementById('bfcMs3Val').textContent=st.renew;
+  document.getElementById('bfcMs4Val').textContent=st.lev;
+  document.getElementById('bfcMs5Val').textContent=st.treaty;
+
+  // Redraw active chart if visible
+  const activePanel=document.querySelector('.bfc2-panel.active');
+  if(activePanel){
+    const pid=activePanel.id;
+    if(pid==='bfc2-jcurve')bfc2DrawJ();
+    if(pid==='bfc2-fx')bfc2DrawFx();
+  }
+}
+
+function bfc2DrawJ(){
+  const m=BFC_MARKETS[bfcMarket];const sc=bfcScenario;const si=BFC_SCEN_IDX[sc];
+  const ticket=parseInt(document.getElementById('bfcSlider').value);
+  const irr10=bfcGetIrr(si)[3];
+  const yrs=[0,1,2,3,4,5,6,7,8,9,10];
+  // J-curve: deploy in yrs 0-1, ramp yr 2-3, full cash generation yr 4+
+  const data=yrs.map(y=>{
+    if(y===0)return +(-ticket).toFixed(1);
+    if(y===1)return +(-ticket*0.7).toFixed(1);
+    if(y===2)return +(-ticket*0.22).toFixed(1);
+    const rv=(irr10/100);
+    const gain=ticket*Math.pow(1+rv,y-2)-ticket;
+    return +(gain*0.82).toFixed(1);
+  });
+  if(bfc2JObj){bfc2JObj.destroy();}
+  const ctx=document.getElementById('bfc2JChart').getContext('2d');
+  bfc2JObj=new Chart(ctx,{type:'line',data:{
+    labels:yrs.map(y=>'Yr '+y),
+    datasets:[
+      {label:'Cumulative cash flow',data,borderColor:'#C09A3C',backgroundColor:'rgba(192,154,60,.07)',
+       pointBackgroundColor:data.map(v=>v>=0?'#0A7070':'#C0392B'),
+       pointRadius:4,tension:.4,fill:true,borderWidth:2},
+      {label:'Break-even',data:yrs.map(()=>0),borderColor:'rgba(255,255,255,.12)',borderDash:[4,4],pointRadius:0,borderWidth:1}
+    ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'USD '+c.parsed.y.toFixed(1)+'M'}}},
+      scales:{
+        x:{ticks:{color:'rgba(255,255,255,.28)',font:{size:9}},grid:{color:'rgba(255,255,255,.05)'}},
+        y:{ticks:{color:'rgba(255,255,255,.28)',font:{size:9},callback:v=>'$'+v.toFixed(0)+'M'},grid:{color:'rgba(255,255,255,.05)'},border:{dash:[4,4]}}
+      }}
+  });
+}
+
+function bfc2DrawFx(){
+  const m=BFC_MARKETS[bfcMarket];const sc=bfcScenario;const si=BFC_SCEN_IDX[sc];
+  const base=bfcGetIrr(si);
+  const adj=m.fxAdj[bfc2FxMode];
+  const vals=base.map((v,i)=>+Math.max(0,v+adj[i]).toFixed(1));
+  const barColors=vals.map(v=>v<4?'rgba(192,58,43,.75)':v<8?'rgba(192,154,60,.8)':'rgba(10,112,112,.8)');
+  document.getElementById('bfc2FxNote').textContent=m.fxNote;
+  if(bfc2FxObj){bfc2FxObj.destroy();}
+  const ctx=document.getElementById('bfc2FxChart').getContext('2d');
+  bfc2FxObj=new Chart(ctx,{type:'bar',data:{
+    labels:['Yr 3','Yr 5','Yr 7','Yr 10'],
+    datasets:[{label:'Net IRR %',data:vals,backgroundColor:barColors,borderRadius:2,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'% net IRR'}}},
+      scales:{
+        x:{ticks:{color:'rgba(255,255,255,.32)',font:{size:10}},grid:{display:false}},
+        y:{ticks:{color:'rgba(255,255,255,.32)',font:{size:9},callback:v=>v+'%'},grid:{color:'rgba(255,255,255,.05)'},min:0}
+      }}
+  });
 }
 
 // Init
-bfcRenderSectors();
-bfcUpdate();
+bfcRenderSectors();bfcUpdate();
 </script>
 
 <script>
@@ -2087,7 +2217,7 @@ selectCountry('kenya');
           <div class="plcc-item"><div class="plcc-check no"></div><div class="plcc-text">Tickets <strong>below USD 3M or above USD 20M</strong> equity are not eligible for Fund I</div></div>
           <div class="plcc-item"><div class="plcc-check no"></div><div class="plcc-text"><strong>Merchant revenue only</strong> (no contracted offtake) does not meet threshold</div></div>
         </div>
-        <a href="mailto:admin@philanthropicfoundation.net?subject=Project%20Information%20Form%20Submission" class="plcc-cta">Submit a Project Information Form →</a>
+        <a href="#apply" class="plcc-cta">Submit a Project Information Form →</a>
       </div>
 
     </div>
@@ -2180,21 +2310,21 @@ selectCountry('kenya');
         <span class="e-icon">◈</span>
         <div class="e-title">Submit a Project</div>
         <p class="e-body">You are a project sponsor — a conglomerate, public authority, or infrastructure developer — with a climate asset in a target jurisdiction requiring structured institutional co-financing. The Fund reviews construction-completion and early-operational stage projects with contracted or quasi-contracted revenue streams. We structure, de-risk, and deploy equity alongside DFI co-lenders.</p>
-        <a href="mailto:admin@philanthropicfoundation.net?subject=Project%20Submission" class="e-cta">Submit a project <span>→</span></a>
+        <a href="#apply" class="e-cta">Submit a project <span>→</span></a>
       </div>
       <div class="e-card b rv d1">
         <div class="e-num">02</div>
         <span class="e-icon">◉</span>
         <div class="e-title">Co-Invest with Us</div>
         <p class="e-body">You are a development finance institution, pension fund, sovereign wealth fund, or ESG-mandated allocator. The Foundation structures each investment as a blended capital stack — combining Fund equity with concessional DFI co-financing to meet your additionality mandate, satisfying IFRS 10 B11 governance requirements. Access to de-risked, EU Green Taxonomy-aligned pipeline through a single governed platform.</p>
-        <a href="mailto:admin@philanthropicfoundation.net?subject=Briefing%20Request" class="e-cta">Request a briefing <span>→</span></a>
+        <a href="#apply" class="e-cta">Request a briefing <span>→</span></a>
       </div>
       <div class="e-card c rv d2">
         <div class="e-num">03</div>
         <span class="e-icon">◇</span>
         <div class="e-title">Become a Dialogue Partner</div>
         <p class="e-body">You represent a government body, multilateral institution, development bank, law firm, or professional services firm whose mandate intersects with climate transition finance across Africa or the Indian Ocean. Join the institutional dialogue programme and help shape how capital flows into the region.</p>
-        <a href="mailto:admin@philanthropicfoundation.net?subject=Partnership%20Enquiry" class="e-cta">Become a partner <span>→</span></a>
+        <a href="#apply" class="e-cta">Become a partner <span>→</span></a>
       </div>
     </div>
   </div>
@@ -2515,7 +2645,7 @@ selectCountry('kenya');
               <div id="vdrToast" style="display:none;background:rgba(192,154,60,.12);border:1px solid rgba(192,154,60,.3);padding:12px 16px;margin-top:4px;animation:panelIn .25s ease;">
                 <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">⬡ Vetted Access Required</div>
                 <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:10px;">This folder is restricted to institutional partners who have completed the Digital Commons vetting process.</div>
-                <a href="mailto:admin@philanthropicfoundation.net?subject=VDR%20Access%20Request" style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(192,154,60,.3);padding-bottom:1px;">Apply for access →</a>
+                <a href="#apply" style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(192,154,60,.3);padding-bottom:1px;">Apply for access →</a>
               </div>
 
             </div>
@@ -2523,7 +2653,7 @@ selectCountry('kenya');
 
           <div class="vdr-footer">
             <div class="vdr-footer-meta">⬡ Repository ready · Access pending vetting</div>
-            <a href="mailto:admin@philanthropicfoundation.net?subject=VDR%20Access%20Request" class="vdr-access-btn">Request Access →</a>
+            <a href="#apply" class="vdr-access-btn">Request Access →</a>
           </div>
         </div>
 
@@ -3675,9 +3805,9 @@ initForm('project');
     <div class="ft-col">
       <h4>Engage</h4>
       <ul class="ft-links">
-        <li><a href="mailto:admin@philanthropicfoundation.net?subject=Project%20Submission">Submit a Project</a></li>
-        <li><a href="mailto:admin@philanthropicfoundation.net?subject=Co-Investment%20Enquiry">Co-Invest with Us</a></li>
-        <li><a href="mailto:admin@philanthropicfoundation.net?subject=Dialogue%20Partner%20Enquiry">Become a Dialogue Partner</a></li>
+        <li><a href="#apply">Submit a Project</a></li>
+        <li><a href="#apply">Co-Invest with Us</a></li>
+        <li><a href="#apply">Become a Dialogue Partner</a></li>
       </ul>
     </div>
     <div class="ft-col">
@@ -3889,6 +4019,7 @@ window.addEventListener('scroll', () => { _updateScrollBar(); _updateProgNav(); 
 _updateProgNav();
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </body>
 </html>
 
