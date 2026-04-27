@@ -222,8 +222,9 @@ h1 em{font-style:italic;color:var(--gold);}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
 /* BAND */
-.band{background:var(--gold);padding:18px 72px;display:flex;align-items:center;gap:0;overflow:hidden;}
+.band{background:var(--gold);padding:18px 0;display:flex;align-items:center;gap:0;overflow:hidden;}
 .band-inner{display:flex;gap:0;white-space:nowrap;animation:band 28s linear infinite;}
+@keyframes band{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .band-item{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ink);padding:0 56px;opacity:.75;}
 .band-sep{color:var(--ink);opacity:.3;}
 
