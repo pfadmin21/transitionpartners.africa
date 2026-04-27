@@ -118,38 +118,57 @@ nav.scrolled{padding:18px 72px;background:rgba(8,19,28,.97);backdrop-filter:blur
 .nav-btn:hover{background:var(--gold2);}
 
 /* HERO */
-#hero{height:100vh;min-height:820px;background:var(--ink);display:grid;grid-template-rows:1fr auto;position:relative;}
-.hero-canvas{position:absolute;inset:0;overflow:hidden;}
-/* subtle animated gradient mesh */
-.hero-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 40%,rgba(10,112,112,.18) 0%,transparent 60%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(192,154,60,.08) 0%,transparent 50%);animation:mesh 12s ease-in-out infinite alternate;}
-@keyframes mesh{from{opacity:.7}to{opacity:1}}
-/* grid lines */
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:80px 80px;}
-/* vertical accent line */
-.hero-vline{position:absolute;left:72px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(192,154,60,.3) 30%,rgba(192,154,60,.3) 70%,transparent);}
+#hero{height:100vh;min-height:820px;background:var(--ink);display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;position:relative;overflow:hidden;}
+.hero-left{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 64px 0 136px;grid-column:1;grid-row:1;}
+.hero-right{position:relative;grid-column:2;grid-row:1/3;overflow:hidden;}
+.hero-map-canvas{position:absolute;inset:0;}
+/* left column bg fade */
+.hero-left-fade{position:absolute;top:0;left:0;bottom:0;width:100%;background:linear-gradient(90deg,var(--ink) 55%,transparent 100%);z-index:1;pointer-events:none;}
+/* subtle grid lines on left */
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:80px 80px;z-index:0;}
+.hero-vline{position:absolute;left:72px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,rgba(192,154,60,.3) 30%,rgba(192,154,60,.3) 70%,transparent);z-index:1;}
 
-.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;padding:0 72px 36px 136px;}
-.h-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:32px;display:flex;align-items:center;gap:16px;opacity:0;animation:rise .8s .2s forwards;}
+.h-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:32px;display:flex;align-items:center;gap:16px;opacity:0;animation:rise .8s .2s forwards;position:relative;z-index:2;}
 .h-label::before{content:'';width:32px;height:1px;background:var(--gold);}
-h1{font-family:'EB Garamond',serif;font-size:clamp(56px,7vw,100px);font-weight:400;color:#fff;line-height:1.0;letter-spacing:-.01em;max-width:820px;opacity:0;animation:rise .9s .4s forwards;}
+h1{font-family:'EB Garamond',serif;font-size:clamp(48px,5.5vw,84px);font-weight:400;color:#fff;line-height:1.05;letter-spacing:-.01em;max-width:640px;opacity:0;animation:rise .9s .4s forwards;position:relative;z-index:2;}
 h1 em{font-style:italic;color:var(--gold);}
-.h-sub{font-size:15px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.9;max-width:500px;margin-top:28px;opacity:0;animation:rise .9s .65s forwards;}
-.h-actions{margin-top:44px;display:flex;gap:20px;align-items:center;opacity:0;animation:rise .9s .85s forwards;}
+.h-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.38);line-height:1.9;max-width:460px;margin-top:24px;opacity:0;animation:rise .9s .65s forwards;position:relative;z-index:2;}
+.h-actions{margin-top:40px;display:flex;gap:20px;align-items:center;opacity:0;animation:rise .9s .85s forwards;position:relative;z-index:2;padding-bottom:48px;}
 .btn-solid{background:var(--gold);color:var(--ink);padding:16px 44px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:background .2s,transform .15s,box-shadow .2s;display:inline-block;box-shadow:0 4px 20px rgba(192,154,60,.2);}
 .btn-solid:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 10px 32px rgba(192,154,60,.32);}
 .btn-ghost{color:rgba(255,255,255,.4);font-size:11px;font-weight:300;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:2px;transition:color .2s,border-color .2s;}
 .btn-ghost:hover{color:rgba(255,255,255,.8);border-color:var(--gold);}
 
-.hero-bottom{position:relative;z-index:2;padding:16px 72px 96px;display:flex;justify-content:space-between;align-items:flex-end;opacity:0;animation:rise 1s 1s forwards;border-top:1px solid rgba(192,154,60,.15);}
-.hero-stats{display:flex;gap:64px;}
-.hstat-val{font-family:'EB Garamond',serif;font-size:42px;font-weight:400;color:#fff;line-height:1;}
-.hstat-val sup{font-size:20px;color:var(--gold);}
-.hstat-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.45);text-transform:uppercase;margin-top:6px;}
+.hero-bottom{position:relative;z-index:3;padding:16px 72px 48px 136px;display:flex;justify-content:space-between;align-items:flex-end;opacity:0;animation:rise 1s 1s forwards;border-top:1px solid rgba(192,154,60,.12);grid-column:1;grid-row:2;background:var(--ink);}
+.hero-stats{display:flex;gap:56px;}
+.hstat-val{font-family:'EB Garamond',serif;font-size:38px;font-weight:400;color:#fff;line-height:1;}
+.hstat-val sup{font-size:18px;color:var(--gold);}
+.hstat-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.35);text-transform:uppercase;margin-top:6px;}
 .hero-scroll{display:flex;align-items:center;gap:12px;}
 .hero-scroll span{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.2);text-transform:uppercase;}
 .scroll-track{width:40px;height:1px;background:rgba(255,255,255,.15);position:relative;overflow:hidden;}
 .scroll-track::after{content:'';position:absolute;left:0;top:0;width:14px;height:100%;background:var(--gold);animation:slide 2s ease-in-out infinite;}
 @keyframes slide{0%{left:-14px}100%{left:40px}}
+@keyframes mesh{from{opacity:.7}to{opacity:1}}
+
+/* Hex map nodes */
+.hex-node{position:absolute;cursor:default;}
+.hex-node svg polygon{transition:fill .3s,opacity .3s;}
+.hex-node:hover svg polygon{fill:rgba(10,112,112,.55);}
+.hex-label{position:absolute;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);white-space:nowrap;pointer-events:none;transition:color .3s;}
+.hex-node:hover .hex-label{color:var(--gold);}
+.hex-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--gold);border:1.5px solid rgba(192,154,60,.4);animation:pulse-dot 2.5s ease-in-out infinite;}
+@keyframes pulse-dot{0%,100%{box-shadow:0 0 0 0 rgba(192,154,60,.4)}50%{box-shadow:0 0 0 6px rgba(192,154,60,0)}}
+.hex-line{position:absolute;background:rgba(10,112,112,.25);transform-origin:left center;}
+
+/* mobile hero */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;grid-template-rows:1fr auto;}
+  .hero-right{display:none;}
+  .hero-left{padding:0 28px;grid-column:1;}
+  .hero-bottom{grid-column:1;padding:16px 28px 32px;}
+  .hero-left-fade{display:none;}
+}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
 /* BAND */
@@ -389,7 +408,7 @@ footer{background:#040D14;padding:64px 0 0;}
   nav{padding:22px 28px;}
   nav.scrolled{padding:16px 28px;}
   .nav-links,.nav-btn{display:none;}
-  .hero-content{padding:0 28px 80px 28px;}
+  .hero-left{padding:0 28px 80px 28px;}
   .hero-bottom{padding:0 28px 32px;flex-direction:column;gap:24px;align-items:flex-start;}
   .wrap{padding:0 28px;}
   .geo-layout,.engage-intro,.rt-layout,.p-intro,.apply-layout{grid-template-columns:1fr;gap:48px;}
@@ -616,7 +635,7 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
   <a href="#partners" onclick="closeMob()">Partners</a>
   <a href="#engage" onclick="closeMob()">Engage</a>
   <a href="#commons" onclick="closeMob()">Digital Commons</a>
-  <a href="#apply" class="mob-cta" onclick="closeMob()">Join the Platform</a>
+  <a href="#apply" class="mob-cta" onclick="closeMob()">Request Access</a>
 </div>
 
 
@@ -632,7 +651,7 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
   <a class="pn-dot" href="#partners" aria-label="Partners"><span class="pn-label">Partners</span></a>
   <a class="pn-dot" href="#engage" aria-label="Engage"><span class="pn-label">Engage</span></a>
   <a class="pn-dot" href="#commons" aria-label="Digital Commons"><span class="pn-label">Digital Commons</span></a>
-  <a class="pn-dot" href="#apply" aria-label="Join Platform"><span class="pn-label">Join Platform</span></a>
+  <a class="pn-dot" href="#apply" aria-label="Private Access"><span class="pn-label">Private Access</span></a>
 </div>
 
 <!-- BACK TO TOP -->
@@ -663,27 +682,33 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
       <li><a href="#commons" onclick="closeAllNav()">Digital Commons</a></li>
 
     </ul>
-    <a href="#apply" class="nav-btn">Join the Platform</a>
+    <a href="#apply" class="nav-btn">Request Access</a>
     <button class="mob-ham" id="mobHam" onclick="toggleMob()" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobOverlay"><span></span><span></span><span></span></button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-canvas">
-    <div class="hero-mesh"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-vline"></div>
-  </div>
-  <div class="hero-content">
+  <!-- LEFT: headline + copy -->
+  <div class="hero-grid"></div>
+  <div class="hero-vline"></div>
+  <div class="hero-left">
     <div class="h-label">TAP I · Transition Africa Partners</div>
-    <h1>Blended capital.<br><em>African climate</em><br>infrastructure.</h1>
-    <p class="h-sub">Transition Africa Partners I is the governed co-investment vehicle through which The Philanthropic Foundation deploys blended institutional capital into climate infrastructure across Africa — structured to the standards that development finance institutions require.</p>
+    <h1>The governed vehicle<br><em>African climate</em><br>finance has been<br>waiting for.</h1>
+    <p class="h-sub">A governed co-investment platform through which The Philanthropic Foundation deploys blended institutional capital into climate infrastructure across Africa and the Indian Ocean. Structured to the standards development finance institutions require. Introduced contacts only.</p>
     <div class="h-actions">
-      <a href="#apply" class="btn-solid">Join the Platform</a>
-      <a href="#geo" class="btn-ghost">Where we work</a>
+      <a href="#apply" class="btn-solid">Request Private Access</a>
+      <a href="#geo" class="btn-ghost">Our markets →</a>
     </div>
   </div>
+
+  <!-- RIGHT: hexagonal Africa map -->
+  <div class="hero-right">
+    <div class="hero-left-fade"></div>
+    <canvas id="heroMapCanvas" style="position:absolute;inset:0;display:block;"></canvas>
+  </div>
+
+  <!-- BOTTOM: stats bar (left column only) -->
   <div class="hero-bottom">
     <div class="hero-stats">
       <div>
@@ -705,6 +730,141 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  const canvas = document.getElementById('heroMapCanvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  // TAP I market nodes — positioned as abstract geographic clusters
+  const NODES = [
+    {id:'cairo',    label:'Cairo',      x:.52, y:.08, active:true,  r:7,  connects:['nairobi']},
+    {id:'casab',    label:'Casablanca', x:.18, y:.06, active:false, r:5,  connects:[]},
+    {id:'lagos',    label:'Lagos',      x:.20, y:.30, active:false, r:5,  connects:['nairobi']},
+    {id:'nairobi',  label:'Nairobi',    x:.58, y:.35, active:true,  r:9,  connects:['kigali','mauritius']},
+    {id:'kigali',   label:'Kigali',     x:.50, y:.44, active:true,  r:7,  connects:['dar','mauritius']},
+    {id:'dar',      label:'Dar es Salaam',x:.62,y:.52,active:false, r:5,  connects:['mauritius']},
+    {id:'windhoek', label:'Windhoek',   x:.32, y:.62, active:true,  r:7,  connects:['cape']},
+    {id:'cape',     label:'Cape Town',  x:.28, y:.82, active:false, r:5,  connects:[]},
+    {id:'antana',   label:'Antananarivo',x:.74,y:.58, active:true,  r:7,  connects:['mauritius','seychelles']},
+    {id:'mauritius',label:'Mauritius',  x:.80, y:.70, active:true,  r:11, connects:['seychelles'], platform:true},
+    {id:'seychelles',label:'Seychelles',x:.88, y:.44, active:true,  r:7,  connects:[]},
+    {id:'joburg',   label:'Johannesburg',x:.42,y:.72, active:false, r:5,  connects:['windhoek','cape']},
+  ];
+
+  const TEAL  = 'rgba(10,112,112,';
+  const GOLD  = 'rgba(192,154,60,';
+  const WHITE = 'rgba(255,255,255,';
+
+  // Hexagon path helper
+  function hexPath(cx,cy,r){
+    ctx.beginPath();
+    for(let i=0;i<6;i++){
+      const a = Math.PI/180*(60*i-30);
+      i===0?ctx.moveTo(cx+r*Math.cos(a),cy+r*Math.sin(a)):ctx.lineTo(cx+r*Math.cos(a),cy+r*Math.sin(a));
+    }
+    ctx.closePath();
+  }
+
+  // Background hex grid (decorative)
+  function drawHexGrid(W,H){
+    const s=52, h=s*Math.sqrt(3);
+    ctx.globalAlpha=1;
+    for(let row=-1;row<H/h+2;row++){
+      for(let col=-1;col<W/s/1.5+2;col++){
+        const cx=col*s*1.5;
+        const cy=row*h+(col%2===0?0:h/2);
+        hexPath(cx,cy,s*.48);
+        const d=Math.sqrt(Math.pow(cx-W*.65,2)+Math.pow(cy-H*.45,2));
+        const fade=Math.max(0,1-d/(W*.55));
+        ctx.fillStyle=TEAL+(.04+fade*.08)+')';
+        ctx.fill();
+        ctx.strokeStyle=TEAL+(.06+fade*.12)+')';
+        ctx.lineWidth=.5;
+        ctx.stroke();
+      }
+    }
+  }
+
+  function resize(){
+    const rect=canvas.parentElement.getBoundingClientRect();
+    canvas.width=rect.width||window.innerWidth/2;
+    canvas.height=rect.height||window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize',resize);
+
+  let tick=0;
+  function draw(){
+    const W=canvas.width, H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+
+    // radial glow centre-right
+    const grd=ctx.createRadialGradient(W*.7,H*.4,0,W*.7,H*.4,W*.6);
+    grd.addColorStop(0,TEAL+'.14)');grd.addColorStop(1,'transparent');
+    ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
+
+    drawHexGrid(W,H);
+
+    // connection lines
+    NODES.forEach(n=>{
+      n.connects.forEach(tid=>{
+        const t=NODES.find(x=>x.id===tid);if(!t)return;
+        const x1=n.x*W,y1=n.y*H,x2=t.x*W,y2=t.y*H;
+        ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);
+        ctx.strokeStyle=TEAL+'.3)';ctx.lineWidth=.8;ctx.setLineDash([4,8]);ctx.stroke();
+        ctx.setLineDash([]);
+        // animated packet
+        const p=(tick*.003+n.x)%1;
+        const px=x1+(x2-x1)*p,py=y1+(y2-y1)*p;
+        ctx.beginPath();ctx.arc(px,py,2,0,Math.PI*2);
+        ctx.fillStyle=GOLD+'.6)';ctx.fill();
+      });
+    });
+
+    // nodes
+    NODES.forEach(n=>{
+      const x=n.x*W,y=n.y*H,r=n.r;
+      // outer ring pulse for active
+      if(n.active){
+        const pulse=Math.sin(tick*.04+n.x*8)*.3+.7;
+        const pulseAlpha=n.platform?(.18*pulse):(.10*pulse);
+        hexPath(x,y,r*2.2);
+        ctx.fillStyle=TEAL+pulseAlpha.toFixed(2)+')';ctx.fill();
+        hexPath(x,y,r*1.6);
+        ctx.strokeStyle=TEAL+(n.platform?.5:.3)+')';ctx.lineWidth=.8;ctx.stroke();
+      }
+      // main hex
+      hexPath(x,y,r);
+      if(n.platform){
+        ctx.fillStyle=GOLD+'.85)';
+      } else if(n.active){
+        ctx.fillStyle=TEAL+'.75)';
+      } else {
+        ctx.fillStyle='rgba(255,255,255,.06)';
+      }
+      ctx.fill();
+      ctx.strokeStyle=n.active?(n.platform?GOLD+'.9)':TEAL+'.9)'):'rgba(255,255,255,.15)';
+      ctx.lineWidth=1;ctx.stroke();
+
+      // dot
+      ctx.beginPath();ctx.arc(x,y,n.platform?3.5:2,0,Math.PI*2);
+      ctx.fillStyle=n.platform?'#08131C':(n.active?'#fff':'rgba(255,255,255,.3)');ctx.fill();
+
+      // label
+      ctx.font=`${Math.floor(W*.012)+7}px "DM Mono",monospace`;
+      ctx.fillStyle=n.active?(n.platform?GOLD+'.95)':WHITE+'.7)'):(WHITE+'.28)');
+      ctx.textAlign='center';
+      ctx.fillText(n.label.toUpperCase(),x,y+r*1.8+10);
+    });
+
+    tick++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 
 <!-- BAND -->
 <div class="band">
@@ -1009,7 +1169,7 @@ input.error ~ .field-error,select.error ~ .field-error,textarea.error ~ .field-e
           </div>
         </div>
       </div>
-        <a href="#apply" class="btn-solid" style="font-size:11px;padding:13px 32px;">Request Fund Documentation</a>
+        <a href="mailto:admin@philanthropicfoundation.net?subject=Fund%20Documentation%20Request" class="btn-solid" style="font-size:11px;padding:13px 32px;">Request the Information Memorandum</a>
       </div>
     </div>
   </div>
@@ -1731,7 +1891,7 @@ function bfcUpdate(){
   ];
   document.getElementById('bfc2Waterfall').innerHTML=segs.map(sg=>
     `<div class="bfc2-wf-seg ${sg.cls}" style="flex:${sg.pct}">
-       <div class="bfc2-wf-lbl">${sg.lbl}</div>
+       ${sg.pct>=10?`<div class="bfc2-wf-lbl">${sg.lbl}</div>`:''}
        <div class="bfc2-wf-pct">${sg.pct}%</div>
      </div>`
   ).join('');
@@ -2217,7 +2377,7 @@ selectCountry('kenya');
           <div class="plcc-item"><div class="plcc-check no"></div><div class="plcc-text">Tickets <strong>below USD 3M or above USD 20M</strong> equity are not eligible for Fund I</div></div>
           <div class="plcc-item"><div class="plcc-check no"></div><div class="plcc-text"><strong>Merchant revenue only</strong> (no contracted offtake) does not meet threshold</div></div>
         </div>
-        <a href="#apply" class="plcc-cta">Submit a Project Information Form →</a>
+        <a href="mailto:admin@philanthropicfoundation.net?subject=Project%20Information%20Form%20Submission" class="plcc-cta">Present a Project for Consideration →</a>
       </div>
 
     </div>
@@ -2308,23 +2468,23 @@ selectCountry('kenya');
       <div class="e-card a rv">
         <div class="e-num">01</div>
         <span class="e-icon">◈</span>
-        <div class="e-title">Submit a Project</div>
+        <div class="e-title">Present a Project</div>
         <p class="e-body">You are a project sponsor — a conglomerate, public authority, or infrastructure developer — with a climate asset in a target jurisdiction requiring structured institutional co-financing. The Fund reviews construction-completion and early-operational stage projects with contracted or quasi-contracted revenue streams. We structure, de-risk, and deploy equity alongside DFI co-lenders.</p>
-        <a href="#apply" class="e-cta">Submit a project <span>→</span></a>
+        <a href="mailto:admin@philanthropicfoundation.net?subject=Project%20Submission" class="e-cta">Present a project <span>→</span></a>
       </div>
       <div class="e-card b rv d1">
         <div class="e-num">02</div>
         <span class="e-icon">◉</span>
         <div class="e-title">Co-Invest with Us</div>
         <p class="e-body">You are a development finance institution, pension fund, sovereign wealth fund, or ESG-mandated allocator. The Foundation structures each investment as a blended capital stack — combining Fund equity with concessional DFI co-financing to meet your additionality mandate, satisfying IFRS 10 B11 governance requirements. Access to de-risked, EU Green Taxonomy-aligned pipeline through a single governed platform.</p>
-        <a href="#apply" class="e-cta">Request a briefing <span>→</span></a>
+        <a href="mailto:admin@philanthropicfoundation.net?subject=Briefing%20Request" class="e-cta">Request a private briefing <span>→</span></a>
       </div>
       <div class="e-card c rv d2">
         <div class="e-num">03</div>
         <span class="e-icon">◇</span>
         <div class="e-title">Become a Dialogue Partner</div>
         <p class="e-body">You represent a government body, multilateral institution, development bank, law firm, or professional services firm whose mandate intersects with climate transition finance across Africa or the Indian Ocean. Join the institutional dialogue programme and help shape how capital flows into the region.</p>
-        <a href="#apply" class="e-cta">Become a partner <span>→</span></a>
+        <a href="mailto:admin@philanthropicfoundation.net?subject=Partnership%20Enquiry" class="e-cta">Explore a partnership <span>→</span></a>
       </div>
     </div>
   </div>
@@ -2645,7 +2805,7 @@ selectCountry('kenya');
               <div id="vdrToast" style="display:none;background:rgba(192,154,60,.12);border:1px solid rgba(192,154,60,.3);padding:12px 16px;margin-top:4px;animation:panelIn .25s ease;">
                 <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">⬡ Vetted Access Required</div>
                 <div style="font-size:11px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.6;margin-bottom:10px;">This folder is restricted to institutional partners who have completed the Digital Commons vetting process.</div>
-                <a href="#apply" style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(192,154,60,.3);padding-bottom:1px;">Apply for access →</a>
+                <a href="mailto:admin@philanthropicfoundation.net?subject=VDR%20Access%20Request" style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(192,154,60,.3);padding-bottom:1px;">Request access →</a>
               </div>
 
             </div>
@@ -2653,7 +2813,7 @@ selectCountry('kenya');
 
           <div class="vdr-footer">
             <div class="vdr-footer-meta">⬡ Repository ready · Access pending vetting</div>
-            <a href="#apply" class="vdr-access-btn">Request Access →</a>
+            <a href="mailto:admin@philanthropicfoundation.net?subject=VDR%20Access%20Request" class="vdr-access-btn">Request Secure Access →</a>
           </div>
         </div>
 
@@ -2902,9 +3062,9 @@ function subscribeBriefing() {
 <!-- DIVIDER: Join the Platform -->
 <div class="sec-divider">
   <span class="sec-divider-num">09</span>
-  <span class="sec-divider-name">Join the Platform</span>
+  <span class="sec-divider-name">Private Access</span>
   <span class="sec-divider-line"></span>
-  <span class="sec-divider-anchor">Apply · Request Documentation</span>
+  <span class="sec-divider-anchor">Discreet · By Introduction</span>
 </div>
 
 <section id="apply" class="apply-new">
@@ -2916,10 +3076,10 @@ function subscribeBriefing() {
     <div class="pathway-header rv">
       <div class="pathway-intro-row">
         <div>
-          <div class="s-label inv">Join the Platform</div>
-          <h2 class="inv">Tell us<br><em>who you are</em></h2>
+          <div class="s-label inv">Private Access</div>
+          <h2 class="inv">Discreet<br><em>by introduction.</em></h2>
         </div>
-        <p class="pathway-lead">Whether you are a project sponsor, a co-investor, an institutional dialogue partner, or a Roundtable applicant — select your pathway below. Each route opens a tailored intake process. All enquiries are treated as strictly confidential.</p>
+        <p class="pathway-lead">The Foundation does not solicit capital publicly. If you have been introduced to this platform, or if your institution's mandate intersects with ours, we welcome a discreet initial exchange. Select the pathway that best describes your relationship to the Fund. All communications are held in strict confidence.</p>
       </div>
     </div>
 
@@ -2929,7 +3089,7 @@ function subscribeBriefing() {
         <div class="ptab-inner">
           <div class="ptab-num">01</div>
           <span class="ptab-icon">◈</span>
-          <div class="ptab-label">Submit a Project</div>
+          <div class="ptab-label">Present a Project</div>
           <div class="ptab-desc">Sponsor seeking structured co-financing</div>
         </div>
       </div>
@@ -2937,8 +3097,8 @@ function subscribeBriefing() {
         <div class="ptab-inner">
           <div class="ptab-num">02</div>
           <span class="ptab-icon">◉</span>
-          <div class="ptab-label">Co-Invest with Us</div>
-          <div class="ptab-desc">DFI, LP or institutional investor</div>
+          <div class="ptab-label">Explore Co-Investment</div>
+          <div class="ptab-desc">DFI, LP or institutional allocator</div>
         </div>
       </div>
       <div class="ptab t3" data-pathway="dialogue">
@@ -2951,8 +3111,8 @@ function subscribeBriefing() {
       </div>
       
           <span class="ptab-icon">⬡</span>
-          <div class="ptab-label">Apply for the Roundtable</div>
-          <div class="ptab-desc">Request an invitation to the next edition</div>
+          <div class="ptab-label">Roundtable Invitation</div>
+          <div class="ptab-desc">Request consideration for the next edition</div>
         </div>
       </div>
     </div>
@@ -2966,7 +3126,7 @@ function subscribeBriefing() {
         <p class="form-nav-sub" id="navSub">Submit your climate infrastructure project for review by the Foundation's investment team.</p>
         <div class="step-list" id="stepList"></div>
         <div class="form-nav-badge">
-          <div class="fnb-text">Response within 5 business days<br>All enquiries are confidential<br>Administered by DTOS<br>Legal Counsel: Eversheds Sutherland</div>
+          <div class="fnb-text">Discreet response within 5 business days<br>All communications are confidential<br>Administered by DTOS<br>Legal Counsel: Eversheds Sutherland</div>
         </div>
       </div>
 
@@ -2977,7 +3137,7 @@ function subscribeBriefing() {
         <div class="form-success" id="formSuccess">
           <span class="fs-icon">✦</span>
           <div class="fs-title">Submission received.</div>
-          <p class="fs-sub">The Foundation's team will review your enquiry and respond within five business days. All communications are treated as strictly confidential.</p>
+          <p class="fs-sub">Your communication has been received by the Foundation's secretariat. A member of the team will be in contact discreetly within five business days. All correspondence is treated as strictly confidential.</p>
           <div class="fs-ref" id="refCode">REF · TAP-I-2026-XXXX</div>
           <div class="fs-note">Administered by DTOS Ltd · Legal Counsel: Eversheds Sutherland · Principal Banker: AfrAsia Bank<br>© 2026 Transition Africa Partners I · A programme of The Philanthropic Foundation · Mauritius</div>
         </div>
@@ -2993,7 +3153,7 @@ const PATHWAYS = {
 
   project: {
     navTitle: 'Project Submission',
-    navSub: 'Submit your climate infrastructure project for review by the Foundation\'s investment team.',
+    navSub: 'Present your climate infrastructure project for discreet review by the Foundation\'s investment team.',
     steps: [
       { name: 'Eligibility Check', hint: 'Project type & stage' },
       { name: 'Project Details', hint: 'Sector, geography, size' },
@@ -3529,7 +3689,7 @@ function renderPanel() {
           ? `<button class="btn-back" onclick="prevStep()">← Back</button>` 
           : `<span></span>`}
         <span class="form-step-count">${currentStep+1} / ${totalSteps}</span>
-        <button class="btn-next" onclick="${isLast ? 'submitForm()' : 'nextStep()'}">${isLast ? 'Submit Application' : 'Continue →'}</button>
+        <button class="btn-next" onclick="${isLast ? 'submitForm()' : 'nextStep()'}">${isLast ? 'Submit for Consideration' : 'Continue →'}</button>
       </div>
     </div>`;
 }
@@ -3805,9 +3965,9 @@ initForm('project');
     <div class="ft-col">
       <h4>Engage</h4>
       <ul class="ft-links">
-        <li><a href="#apply">Submit a Project</a></li>
-        <li><a href="#apply">Co-Invest with Us</a></li>
-        <li><a href="#apply">Become a Dialogue Partner</a></li>
+        <li><a href="mailto:admin@philanthropicfoundation.net?subject=Project%20Submission">Present a Project</a></li>
+        <li><a href="mailto:admin@philanthropicfoundation.net?subject=Co-Investment%20Enquiry">Explore Co-Investment</a></li>
+        <li><a href="mailto:admin@philanthropicfoundation.net?subject=Dialogue%20Partner%20Enquiry">Institutional Dialogue</a></li>
       </ul>
     </div>
     <div class="ft-col">
