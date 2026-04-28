@@ -2956,6 +2956,9 @@ function subscribeBriefing() {
 .ff textarea{resize:none;height:88px;}
 .ff-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .ff-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;}
+@media(max-width:600px){
+  .ff-row,.ff-row3{grid-template-columns:1fr;gap:0;}
+}
 
 /* chip selector */
 .chip-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
@@ -4049,10 +4052,22 @@ if (bi) bi.innerHTML += bi.innerHTML;
 <!-- INLINE GLOSSARY TOOLTIPS -->
 <style>
 .gloss{border-bottom:1px dotted rgba(192,154,60,.5);cursor:help;color:inherit;position:relative;}
-.gloss-tip{display:none;position:fixed;z-index:9000;background:var(--ink);border:1px solid rgba(192,154,60,.3);padding:12px 16px;max-width:280px;pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.5);}
+.gloss-tip{display:none;position:fixed;z-index:9000;background:var(--ink);border:1px solid rgba(192,154,60,.3);padding:12px 16px;max-width:min(280px,calc(100vw - 24px));pointer-events:none;box-shadow:0 8px 32px rgba(0,0,0,.5);}
 .gloss-tip.visible{display:block;}
 .gt-term{font-family:"DM Mono",monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
 .gt-def{font-size:12px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.6;}
+/* Mobile: pin tooltip to bottom-centre, never near cursor */
+@media(max-width:960px){
+  .gloss-tip{
+    left:12px !important;
+    right:12px !important;
+    bottom:72px !important;
+    top:auto !important;
+    width:auto !important;
+    max-width:calc(100vw - 24px);
+    pointer-events:auto;
+  }
+}
 </style>
 <div class="gloss-tip" id="glossTip"><div class="gt-term" id="glossTerm"></div><div class="gt-def" id="glossDef"></div></div>
 <script>
@@ -4076,23 +4091,58 @@ const tip = document.getElementById("glossTip");
 const tipTerm = document.getElementById("glossTerm");
 const tipDef = document.getElementById("glossDef");
 document.querySelectorAll(".gloss").forEach(el => {
-  el.addEventListener("mouseenter", e => {
-    const term = el.dataset.term || el.textContent.toLowerCase().trim();
-    const def = GLOSSARY[term];
-    if (!def) return;
-    tipTerm.textContent = term.toUpperCase();
-    tipDef.textContent = def;
-    tip.classList.add("visible");
-    positionTip(e);
-  });
-  el.addEventListener("mousemove", positionTip);
-  el.addEventListener("mouseleave", () => tip.classList.remove("visible"));
+  // Mouse (desktop only)
+  el.addEventListener("mouseenter", e => { showTip(el, e.clientX, e.clientY); });
+  el.addEventListener("mousemove", e => { placeTip(e.clientX, e.clientY); });
+  el.addEventListener("mouseleave", () => hideTip());
+
+  // Touch (mobile) — tap to show, dismissed by scroll or tap elsewhere
+  el.addEventListener("touchend", e => {
+    e.preventDefault();
+    const wasVisible = tip.classList.contains("visible") && tip._activeEl === el;
+    hideTip();
+    if (!wasVisible) {
+      showTip(el, 0, 0); // position ignored on mobile — CSS pins to bottom
+    }
+  }, { passive: false });
 });
-function positionTip(e) {
-  const x = e.clientX + 14, y = e.clientY - 10;
+
+// Dismiss on tap outside gloss term
+document.addEventListener("touchend", e => {
+  if (!e.target.closest(".gloss")) hideTip();
+}, { passive: true });
+
+// Dismiss on scroll (mobile)
+window.addEventListener("scroll", () => hideTip(), { passive: true });
+
+function showTip(el, cx, cy) {
+  const term = el.dataset.term || el.textContent.toLowerCase().trim();
+  const def = GLOSSARY[term];
+  if (!def) return;
+  tipTerm.textContent = term.toUpperCase();
+  tipDef.textContent = def;
+  tip._activeEl = el;
+  tip.classList.add("visible");
+  placeTip(cx, cy);
+}
+function hideTip() {
+  tip.classList.remove("visible");
+  tip._activeEl = null;
+}
+function placeTip(cx, cy) {
+  // On mobile the CSS handles positioning — skip JS placement
+  if (window.innerWidth <= 960) return;
   const w = window.innerWidth, h = window.innerHeight;
-  tip.style.left = (x + 290 > w ? x - 304 : x) + "px";
-  tip.style.top  = (y + 120 > h ? y - 130 : y) + "px";
+  const tipW = Math.min(280, w - 24);
+  const tipH = tip.offsetHeight || 120;
+  let x = cx + 14;
+  if (x + tipW > w - 8) x = cx - tipW - 14;
+  x = Math.max(8, x);
+  let y = cy - 10;
+  if (y + tipH > h - 8) y = cy - tipH - 10;
+  y = Math.max(8, y);
+  tip.style.left = x + "px";
+  tip.style.top  = y + "px";
 }
 
 // Mobile nav
