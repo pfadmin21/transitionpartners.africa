@@ -10,8 +10,8 @@
 /* ── GEO MAP ── */
 #geo{background:var(--ink2);position:relative;overflow:hidden;padding-top:56px;}
 .geo-wrap{max-width:1400px;margin:0 auto;padding:0 72px;position:relative;z-index:2;}
-.geo-top{display:grid;grid-template-columns:420px 1fr;gap:72px;align-items:start;margin-bottom:0;}
-.geo-right-col{display:flex;flex-direction:column;gap:0;}
+.geo-top{display:grid;grid-template-columns:360px 1fr;gap:48px;align-items:start;margin-bottom:0;min-width:0;}
+.geo-right-col{display:flex;flex-direction:column;gap:0;min-width:0;overflow:hidden;}
 .geo-derisking-strip{display:flex;gap:2px;margin-bottom:36px;}
 .gds-pill{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:16px 18px;transition:background .2s,border-color .2s;}
 .gds-pill:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);}
@@ -114,8 +114,8 @@
 .bfc-pill:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);}
 .bfc-pill.active{background:rgba(10,112,112,.15);border-color:var(--teal);color:#5CC8C8;}
 .bfc-pill.domicile{border-color:rgba(192,154,60,.2);color:rgba(192,154,60,.5);cursor:default;font-size:8px;}
-.bfc-grid{display:grid;grid-template-columns:340px 1fr;gap:3px;align-items:start;}
-.bfc-inputs{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:28px;}
+.bfc-grid{display:grid;grid-template-columns:1fr;gap:3px;align-items:start;min-width:0;}
+.bfc-inputs{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:20px;}
 .bfc-input-section{margin-bottom:24px;}
 .bfc-input-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:10px;}
 .bfc-amount-display{font-family:'EB Garamond',serif;font-size:42px;font-weight:400;color:#fff;line-height:1;margin-bottom:12px;}
@@ -130,21 +130,21 @@
 .bfc-sec{padding:6px 12px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.28);transition:all .2s;}
 .bfc-sec.active{background:rgba(10,112,112,.12);border-color:rgba(10,112,112,.35);color:#5CC8C8;}
 .bfc-disclaimer{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:.5px;color:rgba(255,255,255,.15);line-height:1.7;border-top:1px solid rgba(255,255,255,.05);padding-top:16px;margin-top:20px;}
-.bfc-outputs{display:grid;grid-template-rows:auto auto;gap:3px;}
-.bfc-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;overflow:hidden;}
-.bfc-kpi{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:16px 14px;position:relative;overflow:hidden;min-width:0;}
+.bfc-outputs{display:grid;grid-template-rows:auto auto;gap:3px;min-width:0;overflow:hidden;}
+.bfc-kpi-row{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.bfc-kpi{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:14px 12px;position:relative;overflow:hidden;min-width:0;}
 .bfc-kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .bfc-kpi.k-gold::before{background:linear-gradient(90deg,var(--gold),transparent);}
 .bfc-kpi.k-teal::before{background:linear-gradient(90deg,var(--teal),transparent);}
 .bfc-kpi.k-blue::before{background:linear-gradient(90deg,#4a9cc8,transparent);}
 .bfc-kpi.k-green::before{background:linear-gradient(90deg,#4caf6e,transparent);}
-.bfc-kpi-label{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:8px;}
-.bfc-kpi-val{font-family:'EB Garamond',serif;font-size:26px;font-weight:400;line-height:1;transition:all .35s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bfc-kpi-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:6px;line-height:1.4;}
+.bfc-kpi-val{font-family:'EB Garamond',serif;font-size:clamp(22px,2.5vw,32px);font-weight:400;line-height:1;transition:all .35s;}
 .bfc-kpi-val.gold{color:var(--gold);}
 .bfc-kpi-val.teal{color:#5CC8C8;}
 .bfc-kpi-val.blue{color:#4a9cc8;}
 .bfc-kpi-val.green{color:#4caf6e;}
-.bfc-kpi-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,.22);margin-top:5px;line-height:1.4;}
+.bfc-kpi-sub{font-size:10px;font-weight:300;color:rgba(255,255,255,.22);margin-top:4px;line-height:1.4;}
 .bfc2-tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:20px;}
 .bfc2-tab{padding:9px 18px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
 .bfc2-tab:hover{color:rgba(255,255,255,.65);}
@@ -396,8 +396,7 @@
           </svg>
         </div>
 
-        <!-- BFC CALCULATOR -->
-        <div class="bfc-inline rv d2">
+
           <div class="bfc-header">
             <div class="bfc-title-block">
               <div class="s-label inv">Blended Finance Calculator</div>
@@ -498,7 +497,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
