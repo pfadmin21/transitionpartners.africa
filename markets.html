@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Markets · TAP I · Transition Africa Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/global.css">
+<style>
+/* ── GEO MAP ── */
+#geo{background:var(--ink2);position:relative;overflow:hidden;padding-top:56px;}
+.geo-wrap{max-width:1400px;margin:0 auto;padding:0 72px;position:relative;z-index:2;}
+.geo-top{display:grid;grid-template-columns:420px 1fr;gap:72px;align-items:start;margin-bottom:0;}
+.geo-right-col{display:flex;flex-direction:column;gap:0;}
+.geo-derisking-strip{display:flex;gap:2px;margin-bottom:36px;}
+.gds-pill{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:16px 18px;transition:background .2s,border-color .2s;}
+.gds-pill:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);}
+.gds-pill-title{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.gds-pill-body{font-size:11px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.55;}
+.geo-list{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
+.geo-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:14px 18px;border:1px solid rgba(255,255,255,.05);cursor:pointer;transition:all .25s;position:relative;}
+.geo-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:transparent;transition:background .25s;}
+.geo-item:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);}
+.geo-item.active{background:rgba(10,112,112,.1);border-color:rgba(10,112,112,.3);}
+.geo-item.active::before{background:var(--teal);}
+.geo-item.domicile.active{background:rgba(192,154,60,.08);border-color:rgba(192,154,60,.3);}
+.geo-item.domicile.active::before{background:var(--gold);}
+.gi-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.gi-dot.primary{background:var(--teal);}
+.gi-dot.secondary{background:rgba(10,112,112,.4);border:1px solid rgba(10,112,112,.6);}
+.gi-dot.domicile{background:var(--gold);}
+.gi-name{font-size:14px;font-weight:400;color:rgba(255,255,255,.6);transition:color .25s;}
+.geo-item.active .gi-name{color:#fff;}
+.gi-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;}
+.gi-tag.p1{color:var(--teal);border:1px solid rgba(10,112,112,.3);}
+.gi-tag.p2{color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.1);}
+.gi-tag.dom{color:var(--gold);border:1px solid rgba(192,154,60,.3);}
+.geo-map-wrap{position:relative;}
+.geo-map-svg{width:100%;height:440px;display:block;}
+.map-country{fill:rgba(255,255,255,.04);stroke:rgba(255,255,255,.08);stroke-width:0.5;transition:fill .3s,stroke .3s;}
+.map-country.target-primary{fill:rgba(10,112,112,.25);stroke:rgba(10,112,112,.5);stroke-width:0.8;cursor:pointer;}
+.map-country.target-secondary{fill:rgba(10,112,112,.12);stroke:rgba(10,112,112,.3);stroke-width:0.8;cursor:pointer;}
+.map-country.target-domicile{fill:rgba(192,154,60,.2);stroke:rgba(192,154,60,.5);stroke-width:0.8;cursor:pointer;}
+.map-country.target-primary:hover,.map-country.target-primary.active{fill:rgba(10,112,112,.5);stroke:#5CC8C8;stroke-width:1.2;}
+.map-country.target-secondary:hover,.map-country.target-secondary.active{fill:rgba(10,112,112,.3);stroke:#5CC8C8;stroke-width:1;}
+.map-country.target-domicile:hover,.map-country.target-domicile.active{fill:rgba(192,154,60,.4);stroke:var(--gold);stroke-width:1.2;}
+.map-legend{display:flex;gap:24px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.07);}
+.ml-item{display:flex;align-items:center;gap:8px;}
+.ml-dot{width:8px;height:8px;border-radius:50%;}
+.ml-dot.p1{background:var(--teal);}
+.ml-dot.p2{background:rgba(10,112,112,.4);border:1px solid rgba(10,112,112,.6);}
+.ml-dot.dom{background:var(--gold);}
+.ml-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.3);text-transform:uppercase;}
+
+/* Country profile panel */
+.geo-profile{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.07);margin-top:20px;overflow:hidden;transition:border-color .3s;}
+.gp-header{padding:22px 24px 18px;border-bottom:1px solid rgba(255,255,255,.06);}
+.gp-name{font-family:'EB Garamond',serif;font-size:26px;color:#fff;line-height:1;margin-bottom:4px;}
+.gp-region{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;color:var(--teal);text-transform:uppercase;}
+.gp-headline{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.65;margin-top:10px;}
+.gp-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.06);}
+.gp-tab{flex:1;padding:11px 6px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.25);cursor:pointer;text-align:center;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;margin-bottom:-1px;}
+.gp-tab:hover{color:rgba(255,255,255,.5);}
+.gp-tab.active{color:#fff;border-bottom-color:var(--teal);}
+.gp-panels{padding:20px 24px;}
+.gp-panel{display:none;}
+.gp-panel.active{display:block;}
+.gpp-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.gpp-stat{background:rgba(255,255,255,.03);padding:14px 16px;}
+.gpp-stat-val{font-family:'EB Garamond',serif;font-size:26px;color:#fff;line-height:1;}
+.gpp-stat-val em{color:var(--gold);font-style:normal;font-size:16px;}
+.gpp-stat-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-top:3px;}
+.gpp-text{font-size:12px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.7;}
+.gpp-drisk{display:flex;flex-direction:column;gap:6px;}
+.gpp-drisk-item{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:10px 12px;background:rgba(255,255,255,.03);border-left:2px solid transparent;transition:border-color .2s;}
+.gpp-drisk-item:hover{border-left-color:var(--teal);}
+.gpp-drisk-title{font-size:11px;font-weight:500;color:rgba(255,255,255,.7);margin-bottom:2px;}
+.gpp-drisk-body{font-size:10.5px;font-weight:300;color:rgba(255,255,255,.3);line-height:1.55;}
+.gpp-drisk-badge{display:inline-block;font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;padding:2px 7px;border:1px solid rgba(10,112,112,.4);color:#5CC8C8;text-transform:uppercase;margin-top:4px;}
+.gpp-drisk-badge.gold{border-color:rgba(192,154,60,.4);color:var(--gold);}
+.gpp-pop-hero{display:flex;align-items:baseline;gap:10px;margin-bottom:14px;}
+.gpp-pop-num{font-family:'EB Garamond',serif;font-size:40px;color:#fff;line-height:1;}
+.gpp-pop-unit{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(255,255,255,.3);text-transform:uppercase;}
+.gpp-trend-bars{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;}
+.gpp-tbar{display:grid;grid-template-columns:110px 1fr 48px;align-items:center;gap:8px;}
+.gpp-tbar-label{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;color:rgba(255,255,255,.3);text-transform:uppercase;}
+.gpp-tbar-track{height:5px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;}
+.gpp-tbar-fill{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+.gpp-tbar-fill.good{background:#4caf6e;}
+.gpp-tbar-fill.warn{background:var(--gold);}
+.gpp-tbar-fill.bad{background:#e05c5c;}
+.gpp-tbar-val{font-family:'DM Mono',monospace;font-size:8px;color:rgba(255,255,255,.4);text-align:right;}
+.gpp-trend-note{font-size:11px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.65;}
+.gpp-energy-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;}
+.gppe-card{background:rgba(255,255,255,.03);padding:12px 14px;text-align:center;}
+.gppe-icon{font-size:18px;display:block;margin-bottom:6px;}
+.gppe-val{font-family:'EB Garamond',serif;font-size:20px;color:#fff;}
+.gppe-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:rgba(255,255,255,.25);text-transform:uppercase;margin-top:2px;}
+.gppe-ndcbar{margin-top:12px;}
+.gppe-ndcbar-label{display:flex;justify-content:space-between;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;color:rgba(255,255,255,.3);text-transform:uppercase;margin-bottom:5px;}
+.gppe-ndcbar-track{height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.gppe-ndcbar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--teal),#5CC8C8);transition:width .7s cubic-bezier(.22,1,.36,1);}
+.gppe-ndctext{font-size:11px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.65;margin-top:10px;}
+
+/* BFC Calculator */
+.bfc-inline{margin-top:28px;}
+.bfc-inline .bfc-header{margin-bottom:24px;flex-direction:column;align-items:flex-start;gap:12px;}
+.bfc-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;gap:32px;flex-wrap:wrap;}
+.bfc-title-block h3{font-family:'EB Garamond',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:#fff;line-height:1.05;margin-top:8px;}
+.bfc-title-block h3 em{font-style:italic;color:rgba(255,255,255,.35);}
+.bfc-desc{font-size:13px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.75;max-width:420px;}
+.bfc-market-pills{display:flex;gap:2px;margin-bottom:32px;flex-wrap:wrap;}
+.bfc-pill{padding:8px 18px;border:1px solid rgba(255,255,255,.08);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;transition:all .2s;background:rgba(255,255,255,.02);}
+.bfc-pill:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.6);}
+.bfc-pill.active{background:rgba(10,112,112,.15);border-color:var(--teal);color:#5CC8C8;}
+.bfc-pill.domicile{border-color:rgba(192,154,60,.2);color:rgba(192,154,60,.5);cursor:default;font-size:8px;}
+.bfc-grid{display:grid;grid-template-columns:340px 1fr;gap:3px;align-items:start;}
+.bfc-inputs{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:28px;}
+.bfc-input-section{margin-bottom:24px;}
+.bfc-input-label{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:10px;}
+.bfc-amount-display{font-family:'EB Garamond',serif;font-size:42px;font-weight:400;color:#fff;line-height:1;margin-bottom:12px;}
+.bfc-amount-display em{color:var(--gold);font-style:normal;font-size:24px;}
+.bfc-slider{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:rgba(255,255,255,.08);outline:none;cursor:pointer;border-radius:1px;}
+.bfc-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--ink);box-shadow:0 0 0 3px rgba(192,154,60,.18);}
+.bfc-range-labels{display:flex;justify-content:space-between;margin-top:5px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;color:rgba(255,255,255,.18);}
+.bfc-scenario-row{display:flex;gap:2px;}
+.bfc-scen{flex:1;padding:7px 0;text-align:center;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:1px solid rgba(255,255,255,.07);color:rgba(255,255,255,.28);transition:all .2s;}
+.bfc-scen.active{background:rgba(192,154,60,.1);border-color:rgba(192,154,60,.3);color:var(--gold);}
+.bfc-sector-row{display:flex;gap:2px;flex-wrap:wrap;}
+.bfc-sec{padding:6px 12px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;border:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.28);transition:all .2s;}
+.bfc-sec.active{background:rgba(10,112,112,.12);border-color:rgba(10,112,112,.35);color:#5CC8C8;}
+.bfc-disclaimer{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:.5px;color:rgba(255,255,255,.15);line-height:1.7;border-top:1px solid rgba(255,255,255,.05);padding-top:16px;margin-top:20px;}
+.bfc-outputs{display:grid;grid-template-rows:auto auto;gap:3px;}
+.bfc-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;}
+.bfc-kpi{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:20px 18px;position:relative;overflow:hidden;}
+.bfc-kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.bfc-kpi.k-gold::before{background:linear-gradient(90deg,var(--gold),transparent);}
+.bfc-kpi.k-teal::before{background:linear-gradient(90deg,var(--teal),transparent);}
+.bfc-kpi.k-blue::before{background:linear-gradient(90deg,#4a9cc8,transparent);}
+.bfc-kpi.k-green::before{background:linear-gradient(90deg,#4caf6e,transparent);}
+.bfc-kpi-label{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:8px;}
+.bfc-kpi-val{font-family:'EB Garamond',serif;font-size:32px;font-weight:400;line-height:1;transition:all .35s;}
+.bfc-kpi-val.gold{color:var(--gold);}
+.bfc-kpi-val.teal{color:#5CC8C8;}
+.bfc-kpi-val.blue{color:#4a9cc8;}
+.bfc-kpi-val.green{color:#4caf6e;}
+.bfc-kpi-sub{font-size:11px;font-weight:300;color:rgba(255,255,255,.22);margin-top:5px;line-height:1.4;}
+.bfc2-tab-bar{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:20px;}
+.bfc2-tab{padding:9px 18px;font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.3);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;}
+.bfc2-tab:hover{color:rgba(255,255,255,.65);}
+.bfc2-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.bfc2-panel{display:none;}
+.bfc2-panel.active{display:block;}
+.bfc2-ts-wrap{display:flex;flex-direction:column;gap:3px;margin-bottom:14px;}
+.bfc2-ts-row{display:grid;grid-template-columns:3px 1fr auto auto;align-items:center;background:rgba(255,255,255,.03);transition:background .2s;}
+.bfc2-ts-row:hover{background:rgba(255,255,255,.06);}
+.bfc2-ts-accent{align-self:stretch;}
+.bfc2-ts-body{padding:11px 14px;display:flex;flex-direction:column;gap:3px;}
+.bfc2-ts-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);}
+.bfc2-ts-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.22);line-height:1.4;}
+.bfc2-ts-bar-wrap{padding:11px 14px 11px 0;width:100px;}
+.bfc2-ts-bar{height:2px;background:rgba(255,255,255,.06);margin-bottom:5px;}
+.bfc2-ts-bar-fill{height:100%;transition:width .6s cubic-bezier(.22,1,.36,1);}
+.bfc2-ts-pct{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;color:rgba(255,255,255,.28);}
+.bfc2-ts-amt{font-family:'EB Garamond',serif;font-size:20px;color:#fff;padding:11px 16px 11px 0;min-width:72px;text-align:right;white-space:nowrap;}
+.bfc2-loss-wrap{background:rgba(192,154,60,.05);border:1px solid rgba(192,154,60,.12);padding:10px 14px;margin-top:3px;}
+.bfc2-loss-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:7px;}
+.bfc2-loss-bar{height:6px;background:rgba(255,255,255,.06);border-radius:1px;overflow:hidden;}
+.bfc2-loss-fill{height:100%;background:linear-gradient(90deg,var(--gold),rgba(192,154,60,.4));transition:width .55s;}
+.bfc2-loss-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.35);margin-top:6px;line-height:1.5;}
+.bfc2-chart-wrap{position:relative;height:180px;margin-bottom:8px;}
+.bfc2-fx-modes{display:flex;gap:2px;margin-bottom:14px;}
+.bfc2-fx-btn{flex:1;padding:8px 6px;text-align:center;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.35);cursor:pointer;transition:.2s;}
+.bfc2-fx-btn:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.7);}
+.bfc2-fx-btn.active{border-color:var(--teal);color:#5CC8C8;background:rgba(10,112,112,.1);}
+.bfc2-fx-note{font-size:10px;font-weight:300;color:rgba(255,255,255,.3);line-height:1.6;padding:10px 12px;background:rgba(255,255,255,.03);border-left:2px solid rgba(192,154,60,.3);margin-top:10px;}
+.bfc2-carbon-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:rgba(30,122,66,.08);border:1px solid rgba(30,122,66,.2);margin-bottom:14px;cursor:pointer;user-select:none;}
+.bfc2-toggle{width:30px;height:17px;border-radius:9px;background:rgba(255,255,255,.1);position:relative;transition:.2s;flex-shrink:0;}
+.bfc2-toggle::after{content:'';position:absolute;width:13px;height:13px;border-radius:50%;background:rgba(255,255,255,.5);top:2px;left:2px;transition:.22s;}
+.bfc2-toggle.on{background:rgba(30,122,66,.7);}
+.bfc2-toggle.on::after{left:15px;background:#fff;}
+.bfc2-carbon-lbl{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.bfc2-carbon-boost{margin-left:auto;font-family:'DM Mono',monospace;font-size:8px;color:#5CC8C8;letter-spacing:1px;}
+.bfc2-impact-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:14px;}
+.bfc2-impact-card{background:rgba(255,255,255,.04);padding:14px 12px;border-top:2px solid var(--teal);}
+.bfc2-impact-num{font-family:'EB Garamond',serif;font-size:22px;color:#fff;line-height:1;}
+.bfc2-impact-unit{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:var(--gold);margin-left:3px;text-transform:uppercase;}
+.bfc2-impact-desc{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:.5px;color:rgba(255,255,255,.28);margin-top:5px;line-height:1.5;text-transform:uppercase;}
+.bfc2-sdg-row{display:flex;gap:4px;flex-wrap:wrap;}
+.bfc2-sdg{padding:4px 9px;background:rgba(10,112,112,.12);border:1px solid rgba(10,112,112,.25);font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;color:#5CC8C8;text-transform:uppercase;}
+.bfc-risk-items{display:flex;flex-direction:column;gap:7px;}
+.bfc-risk-item{display:grid;grid-template-columns:90px 1fr 28px;gap:8px;align-items:center;}
+.bfc-risk-name{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.bfc-risk-track{height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden;}
+.bfc-risk-fill{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.22,1,.36,1);}
+.bfc-risk-fill.low{background:#4caf6e;}
+.bfc-risk-fill.med{background:var(--gold);}
+.bfc-risk-fill.hi{background:#e07070;}
+.bfc-risk-score{font-family:'DM Mono',monospace;font-size:7.5px;color:rgba(255,255,255,.28);text-align:right;}
+.bfc-market-strip{background:rgba(192,154,60,.05);border:1px solid rgba(192,154,60,.12);padding:14px 18px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:3px;}
+.bfc-mstrip-item{display:flex;flex-direction:column;gap:2px;}
+.bfc-mstrip-val{font-family:'EB Garamond',serif;font-size:18px;color:#fff;}
+.bfc-mstrip-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);}
+.bfc-mstrip-div{width:1px;height:28px;background:rgba(192,154,60,.15);}
+
+@media(max-width:900px){
+  .geo-top{grid-template-columns:1fr;gap:40px;}
+  .geo-wrap{padding:0 28px;}
+  .geo-map-svg{height:300px;}
+  .geo-derisking-strip{flex-wrap:wrap;}
+  .gds-pill{flex:1 1 calc(50% - 1px);}
+  .bfc-grid{grid-template-columns:1fr;}
+  .bfc-kpi-row{grid-template-columns:repeat(2,1fr);}
+  .bfc2-impact-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body id="main">
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-vline"></div>
+  <div class="page-hero-inner">
+    <div class="ph-label">TAP I · Where We Work</div>
+    <h1>The opportunity<br><em>is structural.</em></h1>
+    <p>Africa and the Indian Ocean face a $250B annual climate finance gap. These markets share rapid population growth, expanding energy demand, strong sovereign NDC commitments, and established DFI relationships.</p>
+  </div>
+</div>
+
+<div class="sec-divider">
+  <span class="sec-divider-num">04</span>
+  <span class="sec-divider-name">Where We Work</span>
+  <span class="sec-divider-line"></span>
+  <span class="sec-divider-anchor">Africa &amp; Indian Ocean</span>
+</div>
+
+<section id="geo">
+  <div class="geo-wrap">
+
+    <!-- Derisking strip -->
+    <div class="geo-derisking-strip rv">
+      <div class="gds-pill">
+        <div class="gds-pill-title">Mauritius GBC / DTAA</div>
+        <div class="gds-pill-body">45 Double Taxation treaties eliminate 10–30% withholding on cross-border returns.</div>
+      </div>
+      <div class="gds-pill">
+        <div class="gds-pill-title">DFI Senior Debt Co-Financing</div>
+        <div class="gds-pill-body">IFC, AfDB, Proparco &amp; DEG provide long-tenor senior debt alongside Fund equity.</div>
+      </div>
+      <div class="gds-pill">
+        <div class="gds-pill-title">Contracted Offtake</div>
+        <div class="gds-pill-body">Long-tenor PPAs and water offtake agreements with sovereign or investment-grade counterparties.</div>
+      </div>
+      <div class="gds-pill">
+        <div class="gds-pill-title">Political Risk Coverage</div>
+        <div class="gds-pill-body">MIGA and ATI political risk insurance covers expropriation, currency transfer restrictions, and breach of contract.</div>
+      </div>
+      <div class="gds-pill">
+        <div class="gds-pill-title">Technical Assistance Grants</div>
+        <div class="gds-pill-body">Pre-investment TA from GCF, SEFA, and bilateral donors covers feasibility studies and ESIAs.</div>
+      </div>
+    </div>
+
+    <div class="geo-top rv">
+      <div>
+        <div class="s-label inv">Target Markets</div>
+        <h2 class="inv">The opportunity<br><em>is structural.</em></h2>
+        <p class="s-lead inv" style="margin-top:14px;margin-bottom:24px;">Africa and the Indian Ocean face a $250B annual climate finance gap. These markets share rapid population growth, expanding energy demand, strong sovereign NDC commitments, and established DFI relationships — conditions that make private climate capital both necessary and viable.</p>
+
+        <div class="geo-list">
+          <div class="geo-item active" onclick="selectCountry('kenya')" data-country="kenya"><div class="gi-dot primary"></div><div class="gi-name">Kenya</div><div class="gi-tag p1">East Africa · Primary</div></div>
+          <div class="geo-item" onclick="selectCountry('rwanda')" data-country="rwanda"><div class="gi-dot primary"></div><div class="gi-name">Rwanda</div><div class="gi-tag p1">East Africa · Primary</div></div>
+          <div class="geo-item" onclick="selectCountry('namibia')" data-country="namibia"><div class="gi-dot primary"></div><div class="gi-name">Namibia</div><div class="gi-tag p1">Southern Africa · Primary</div></div>
+          <div class="geo-item" onclick="selectCountry('egypt')" data-country="egypt"><div class="gi-dot primary"></div><div class="gi-name">Egypt</div><div class="gi-tag p1">North Africa · Primary</div></div>
+          <div class="geo-item" onclick="selectCountry('madagascar')" data-country="madagascar"><div class="gi-dot secondary"></div><div class="gi-name">Madagascar</div><div class="gi-tag p2">Indian Ocean · Secondary</div></div>
+          <div class="geo-item" onclick="selectCountry('seychelles')" data-country="seychelles"><div class="gi-dot secondary"></div><div class="gi-name">Seychelles</div><div class="gi-tag p2">Indian Ocean · Secondary</div></div>
+          <div class="geo-item domicile" onclick="selectCountry('mauritius')" data-country="mauritius"><div class="gi-dot domicile"></div><div class="gi-name">Mauritius</div><div class="gi-tag dom">Platform Domicile</div></div>
+        </div>
+
+        <!-- Country profile panel -->
+        <div class="geo-profile" id="geoProfile">
+          <div class="gp-header">
+            <div class="gp-name" id="gpName">Kenya</div>
+            <div class="gp-region" id="gpRegion">East Africa · Primary Market</div>
+            <div class="gp-headline" id="gpHeadline">East Africa's largest economy and a frontier for private climate investment.</div>
+          </div>
+          <div class="gp-tabs">
+            <div class="gp-tab active" onclick="switchTab('opportunity',this)">Opportunity</div>
+            <div class="gp-tab" onclick="switchTab('derisking',this)">Derisking</div>
+            <div class="gp-tab" onclick="switchTab('population',this)">Context</div>
+            <div class="gp-tab" onclick="switchTab('energy',this)">Energy</div>
+          </div>
+          <div class="gp-panels">
+            <div class="gp-panel active" id="panel-opportunity">
+              <div class="gpp-stat-row" id="gpStatRow">
+                <div class="gpp-stat"><div class="gpp-stat-val" id="gpStat1Val">$12<em>B</em></div><div class="gpp-stat-lbl" id="gpStat1Lbl">Annual Climate Finance Gap</div></div>
+                <div class="gpp-stat"><div class="gpp-stat-val" id="gpStat2Val">$4.2<em>B</em></div><div class="gpp-stat-lbl" id="gpStat2Lbl">Private Sector Climate Investment (2023)</div></div>
+              </div>
+              <div class="gpp-text" id="gpOppText">Kenya's green economy transition is among the continent's most advanced.</div>
+            </div>
+            <div class="gp-panel" id="panel-derisking"><div class="gpp-drisk" id="gpDeriskList"></div></div>
+            <div class="gp-panel" id="panel-population">
+              <div class="gpp-pop-hero"><div class="gpp-pop-num" id="gpPop">55M</div><div class="gpp-pop-unit">Population</div></div>
+              <div class="gpp-trend-bars" id="gpTrendBars"></div>
+              <div class="gpp-trend-note" id="gpTrendNote"></div>
+            </div>
+            <div class="gp-panel" id="panel-energy">
+              <div class="gpp-energy-row" id="gpEnergyCards"></div>
+              <div class="gppe-ndcbar">
+                <div class="gppe-ndcbar-label"><span>NDC Renewables Target</span><span id="gpNdcPct">92%</span></div>
+                <div class="gppe-ndcbar-track"><div class="gppe-ndcbar-fill" id="gpNdcBar" style="width:92%"></div></div>
+              </div>
+              <div class="gppe-ndctext" id="gpNdcText"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-legend" style="margin-top:16px;">
+          <div class="ml-item"><div class="ml-dot p1"></div><div class="ml-label">Primary Market</div></div>
+          <div class="ml-item"><div class="ml-dot p2"></div><div class="ml-label">Secondary Market</div></div>
+          <div class="ml-item"><div class="ml-dot dom"></div><div class="ml-label">Platform Domicile</div></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: MAP + BFC -->
+      <div class="geo-right-col">
+        <div class="geo-map-wrap rv d1">
+          <svg class="geo-map-svg" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" id="africaMap">
+            <rect width="800" height="600" fill="rgba(8,19,28,0.6)" rx="4"/>
+            <g stroke="rgba(255,255,255,0.03)" stroke-width="0.5">
+              <line x1="0" y1="100" x2="800" y2="100"/><line x1="0" y1="200" x2="800" y2="200"/>
+              <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="400" x2="800" y2="400"/>
+              <line x1="0" y1="500" x2="800" y2="500"/>
+              <line x1="100" y1="0" x2="100" y2="600"/><line x1="200" y1="0" x2="200" y2="600"/>
+              <line x1="300" y1="0" x2="300" y2="600"/><line x1="400" y1="0" x2="400" y2="600"/>
+              <line x1="500" y1="0" x2="500" y2="600"/><line x1="600" y1="0" x2="600" y2="600"/>
+              <line x1="700" y1="0" x2="700" y2="600"/>
+            </g>
+            <line x1="0" y1="295" x2="800" y2="295" stroke="rgba(255,255,255,0.06)" stroke-width="0.8" stroke-dasharray="4,4"/>
+            <text x="12" y="292" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.15)">EQ</text>
+            <!-- Africa outline paths -->
+            <path class="map-country" d="M 160 20 L 220 18 L 260 22 L 280 30 L 285 50 L 275 70 L 265 90 L 250 100 L 235 115 L 220 125 L 200 130 L 180 125 L 165 115 L 152 100 L 148 80 L 152 55 L 158 35 Z"/>
+            <path class="map-country" d="M 220 18 L 310 20 L 340 28 L 355 45 L 350 70 L 340 90 L 320 105 L 300 110 L 280 108 L 265 95 L 265 90 L 275 70 L 285 50 L 280 30 L 260 22 Z"/>
+            <path class="map-country" d="M 310 20 L 380 18 L 400 25 L 408 45 L 405 75 L 395 100 L 370 112 L 345 112 L 320 105 L 340 90 L 350 70 L 355 45 L 340 28 Z"/>
+            <path class="map-country target-primary" id="map-egypt" onclick="selectCountry('egypt')" d="M 380 18 L 440 16 L 470 20 L 480 35 L 478 60 L 468 85 L 450 100 L 430 108 L 408 108 L 395 100 L 405 75 L 408 45 L 400 25 Z"/>
+            <path class="map-country" d="M 408 108 L 450 108 L 480 115 L 500 130 L 510 155 L 508 180 L 495 200 L 475 215 L 450 222 L 428 218 L 408 208 L 395 190 L 390 165 L 392 140 L 400 120 Z"/>
+            <path class="map-country" d="M 480 115 L 510 108 L 525 118 L 520 140 L 510 155 L 500 130 Z"/>
+            <path class="map-country" d="M 510 155 L 530 140 L 548 148 L 555 168 L 548 200 L 530 230 L 510 245 L 495 238 L 488 220 L 490 200 L 495 200 L 508 180 Z"/>
+            <path class="map-country target-primary" id="map-kenya" onclick="selectCountry('kenya')" d="M 450 222 L 495 218 L 510 225 L 515 245 L 508 268 L 495 282 L 475 290 L 455 288 L 438 278 L 428 258 L 428 238 Z"/>
+            <path class="map-country" d="M 428 258 L 455 288 L 475 290 L 478 310 L 468 332 L 448 345 L 425 348 L 405 340 L 392 322 L 390 300 L 398 280 L 412 268 Z"/>
+            <path class="map-country target-primary" id="map-rwanda" onclick="selectCountry('rwanda')" d="M 428 268 L 442 265 L 448 275 L 440 285 L 428 282 L 422 272 Z"/>
+            <path class="map-country" d="M 340 222 L 390 215 L 428 238 L 428 268 L 422 272 L 410 280 L 398 280 L 390 300 L 375 312 L 355 318 L 332 312 L 315 295 L 308 270 L 312 245 L 325 230 Z"/>
+            <path class="map-country" d="M 315 295 L 355 318 L 375 312 L 390 325 L 385 355 L 370 375 L 345 388 L 318 390 L 298 378 L 285 358 L 285 330 L 295 310 Z"/>
+            <path class="map-country" d="M 390 325 L 425 348 L 448 345 L 465 358 L 468 382 L 455 400 L 430 408 L 405 405 L 385 392 L 375 375 L 385 355 Z"/>
+            <path class="map-country" d="M 448 345 L 478 335 L 495 348 L 498 372 L 490 400 L 478 425 L 460 440 L 440 445 L 425 435 L 420 415 L 430 408 L 455 400 L 468 382 L 465 358 Z"/>
+            <path class="map-country" d="M 475 290 L 495 282 L 510 290 L 512 315 L 505 338 L 490 348 L 478 335 L 448 345 L 425 348 L 448 345 L 468 332 L 478 310 Z"/>
+            <path class="map-country target-primary" id="map-namibia" onclick="selectCountry('namibia')" d="M 285 358 L 318 390 L 345 388 L 370 375 L 385 392 L 388 420 L 375 442 L 348 452 L 318 452 L 292 440 L 275 420 L 272 395 L 278 372 Z"/>
+            <path class="map-country" d="M 345 388 L 385 392 L 388 420 L 375 442 L 348 452 L 325 445 L 308 428 L 308 405 L 318 390 Z"/>
+            <path class="map-country" d="M 292 440 L 318 452 L 348 452 L 375 442 L 388 420 L 405 425 L 420 445 L 415 472 L 395 492 L 365 502 L 335 502 L 305 492 L 285 472 L 278 452 L 280 435 Z"/>
+            <path class="map-country" d="M 148 100 L 165 115 L 180 125 L 200 130 L 220 125 L 235 115 L 245 125 L 250 145 L 242 165 L 228 178 L 208 185 L 185 182 L 165 172 L 148 158 L 138 138 L 138 118 Z"/>
+            <path class="map-country" d="M 165 172 L 185 182 L 208 185 L 228 178 L 245 185 L 255 205 L 248 225 L 230 238 L 208 242 L 185 238 L 168 225 L 158 205 L 160 188 Z"/>
+            <path class="map-country" d="M 245 145 L 280 140 L 310 148 L 325 165 L 322 188 L 308 205 L 285 215 L 260 218 L 245 208 L 235 190 L 240 170 L 248 158 Z"/>
+            <path class="map-country" d="M 280 215 L 325 215 L 340 222 L 325 230 L 312 245 L 295 248 L 278 240 L 268 225 Z"/>
+            <path class="map-country" d="M 310 110 L 350 110 L 380 118 L 395 140 L 392 165 L 380 185 L 358 198 L 335 202 L 315 195 L 300 178 L 295 155 L 298 132 Z"/>
+            <path class="map-country target-secondary" id="map-madagascar" onclick="selectCountry('madagascar')" d="M 560 310 L 575 298 L 588 305 L 595 325 L 595 355 L 588 382 L 575 405 L 558 418 L 542 415 L 532 400 L 530 375 L 535 348 L 545 325 Z"/>
+            <text x="620" y="340" font-family="serif" font-size="11" fill="rgba(255,255,255,0.1)" font-style="italic">Indian Ocean</text>
+            <text x="80" y="380" font-family="serif" font-size="11" fill="rgba(255,255,255,0.1)" font-style="italic">Atlantic</text>
+            <circle class="map-country target-domicile" id="map-mauritius" cx="618" cy="400" r="8" onclick="selectCountry('mauritius')"/>
+            <circle class="map-country target-secondary" id="map-seychelles" cx="595" cy="248" r="6" onclick="selectCountry('seychelles')"/>
+            <circle class="map-country target-secondary" cx="585" cy="240" r="4" onclick="selectCountry('seychelles')"/>
+            <!-- Pulses -->
+            <circle cx="472" cy="252" r="4" fill="var(--teal)" opacity="0.9"/>
+            <circle cx="472" cy="252" r="4" fill="none" stroke="var(--teal)" stroke-width="1.5" opacity="0.8"><animate attributeName="r" from="4" to="18" dur="2.5s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.8" to="0" dur="2.5s" repeatCount="indefinite"/></circle>
+            <circle cx="435" cy="274" r="3" fill="#5CC8C8" opacity="0.9"/>
+            <circle cx="435" cy="274" r="3" fill="none" stroke="#5CC8C8" stroke-width="1.5" opacity="0.6"><animate attributeName="r" from="3" to="14" dur="2.5s" begin="0.4s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.6" to="0" dur="2.5s" begin="0.4s" repeatCount="indefinite"/></circle>
+            <circle cx="328" cy="415" r="4" fill="var(--teal)" opacity="0.9"/>
+            <circle cx="328" cy="415" r="4" fill="none" stroke="var(--teal)" stroke-width="1.5" opacity="0.8"><animate attributeName="r" from="4" to="18" dur="2.5s" begin="0.8s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.8" to="0" dur="2.5s" begin="0.8s" repeatCount="indefinite"/></circle>
+            <circle cx="432" cy="62" r="4" fill="var(--teal)" opacity="0.9"/>
+            <circle cx="432" cy="62" r="4" fill="none" stroke="var(--teal)" stroke-width="1.5" opacity="0.8"><animate attributeName="r" from="4" to="18" dur="2.5s" begin="1.2s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.8" to="0" dur="2.5s" begin="1.2s" repeatCount="indefinite"/></circle>
+            <circle cx="618" cy="400" r="3" fill="var(--gold)" opacity="0.9"/>
+            <circle cx="618" cy="400" r="3" fill="none" stroke="var(--gold)" stroke-width="1.5" opacity="0.8"><animate attributeName="r" from="3" to="16" dur="2s" begin="0.6s" repeatCount="indefinite"/><animate attributeName="opacity" from="0.8" to="0" dur="2s" begin="0.6s" repeatCount="indefinite"/></circle>
+            <!-- Labels -->
+            <text x="418" y="58" font-family="monospace" font-size="8" fill="rgba(255,255,255,0.5)" text-anchor="middle">EGYPT</text>
+            <text x="472" y="264" font-family="monospace" font-size="7.5" fill="rgba(255,255,255,0.5)" text-anchor="middle">KENYA</text>
+            <text x="430" y="272" font-family="monospace" font-size="6" fill="rgba(255,255,255,0.4)" text-anchor="middle">RWANDA</text>
+            <text x="328" y="430" font-family="monospace" font-size="7.5" fill="rgba(255,255,255,0.5)" text-anchor="middle">NAMIBIA</text>
+            <text x="562" y="365" font-family="monospace" font-size="7" fill="rgba(255,255,255,0.4)" text-anchor="middle">MADAGASCAR</text>
+            <text x="640" y="403" font-family="monospace" font-size="6.5" fill="rgba(192,154,60,0.7)" text-anchor="start">MAURITIUS</text>
+            <g stroke="rgba(192,154,60,0.08)" stroke-width="0.8" stroke-dasharray="3,5" fill="none">
+              <line x1="618" y1="400" x2="472" y2="252"/><line x1="618" y1="400" x2="435" y2="274"/>
+              <line x1="618" y1="400" x2="328" y2="415"/><line x1="618" y1="400" x2="432" y2="62"/>
+              <line x1="618" y1="400" x2="590" y2="244"/><line x1="618" y1="400" x2="562" y2="360"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- BFC CALCULATOR -->
+        <div class="bfc-inline rv d2">
+          <div class="bfc-header">
+            <div class="bfc-title-block">
+              <div class="s-label inv">Blended Finance Calculator</div>
+              <h3>Risk &amp; return <em>by market.</em></h3>
+            </div>
+            <p class="bfc-desc">Select a target market, set your equity ticket, and choose a scenario to see the full blended capital stack, J-curve, FX sensitivity, risk profile, and impact metrics. All figures are indicative and market-calibrated.</p>
+          </div>
+          <div class="bfc-market-pills">
+            <div class="bfc-pill active" onclick="bfcSelectMarket('kenya',this)">Kenya</div>
+            <div class="bfc-pill" onclick="bfcSelectMarket('rwanda',this)">Rwanda</div>
+            <div class="bfc-pill" onclick="bfcSelectMarket('namibia',this)">Namibia</div>
+            <div class="bfc-pill" onclick="bfcSelectMarket('egypt',this)">Egypt</div>
+            <div class="bfc-pill" onclick="bfcSelectMarket('madagascar',this)">Madagascar</div>
+            <div class="bfc-pill" onclick="bfcSelectMarket('seychelles',this)">Seychelles</div>
+            <div class="bfc-pill domicile">Mauritius · Platform Domicile</div>
+          </div>
+          <div class="bfc-grid">
+            <div class="bfc-inputs">
+              <div class="bfc-input-section">
+                <div class="bfc-input-label">Equity Ticket</div>
+                <div class="bfc-amount-display"><em id="bfcAmtDisplay">USD 5M</em></div>
+                <input type="range" class="bfc-slider" id="bfcSlider" min="3" max="15" value="5" step="1" oninput="bfcUpdate()">
+                <div class="bfc-range-labels"><span>USD 3M</span><span>USD 9M</span><span>USD 15M</span></div>
+              </div>
+              <div class="bfc-input-section">
+                <div class="bfc-input-label">Return Scenario</div>
+                <div class="bfc-scenario-row">
+                  <div class="bfc-scen active" onclick="bfcSetScen('conservative',this)">Conservative</div>
+                  <div class="bfc-scen" onclick="bfcSetScen('base',this)">Base Case</div>
+                  <div class="bfc-scen" onclick="bfcSetScen('upside',this)">Upside</div>
+                </div>
+              </div>
+              <div class="bfc-input-section">
+                <div class="bfc-input-label">Sector Focus</div>
+                <div class="bfc-sector-row" id="bfcSectors"></div>
+              </div>
+              <div class="bfc2-carbon-row" id="bfc2CarbonRow">
+                <div class="bfc2-toggle" id="bfc2Toggle"></div>
+                <span class="bfc2-carbon-lbl">Layer carbon revenue</span>
+                <span class="bfc2-carbon-boost" id="bfc2CarbonBoost">+0.0% IRR</span>
+              </div>
+              <div class="bfc-disclaimer">All projections are indicative only and do not constitute a financial offer or investment advice. Returns are based on comparable blended finance transactions in the region.</div>
+            </div>
+            <div class="bfc-outputs">
+              <div class="bfc-kpi-row">
+                <div class="bfc-kpi k-gold"><div class="bfc-kpi-label">Fund Equity</div><div class="bfc-kpi-val gold" id="bfcKpi1">USD 5M</div><div class="bfc-kpi-sub">First-loss tranche</div></div>
+                <div class="bfc-kpi k-blue"><div class="bfc-kpi-label">DFI Debt Unlocked</div><div class="bfc-kpi-val blue" id="bfcKpi2">USD 11M</div><div class="bfc-kpi-sub" id="bfcKpi2sub">~2.2× leverage</div></div>
+                <div class="bfc-kpi k-green"><div class="bfc-kpi-label">Total Project Value</div><div class="bfc-kpi-val green" id="bfcKpi3">USD 18M</div><div class="bfc-kpi-sub">Capital mobilised</div></div>
+                <div class="bfc-kpi k-teal"><div class="bfc-kpi-label">Net IRR (Yr 10)</div><div class="bfc-kpi-val teal" id="bfcKpi4">8.9%</div><div class="bfc-kpi-sub" id="bfcKpi4sub">Conservative scenario</div></div>
+              </div>
+              <div class="bfc2-tab-bar">
+                <div class="bfc2-tab active" onclick="bfc2Tab('stack',this)">Capital Stack</div>
+                <div class="bfc2-tab" onclick="bfc2Tab('jcurve',this)">J-Curve</div>
+                <div class="bfc2-tab" onclick="bfc2Tab('fx',this)">FX Sensitivity</div>
+                <div class="bfc2-tab" onclick="bfc2Tab('risk',this)">Risk Profile</div>
+                <div class="bfc2-tab" onclick="bfc2Tab('impact',this)">Impact</div>
+              </div>
+              <div class="bfc2-panel active" id="bfc2-stack">
+                <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;">Blended capital stack · waterfall</div>
+                <div class="bfc2-ts-wrap" id="bfc2TermSheet"></div>
+                <div class="bfc2-loss-wrap"><div class="bfc2-loss-lbl">First-loss protection — fund equity tranche</div><div class="bfc2-loss-bar"><div class="bfc2-loss-fill" id="bfc2LossFill"></div></div><div class="bfc2-loss-note" id="bfc2LossNote"></div></div>
+              </div>
+              <div class="bfc2-panel" id="bfc2-jcurve">
+                <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;">Cumulative cash flow profile · J-curve</div>
+                <div class="bfc2-chart-wrap"><canvas id="bfc2JChart"></canvas></div>
+                <div class="bfc2-fx-note" style="border-left-color:rgba(10,112,112,.4);">J-curve reflects construction period (Yrs 0–2), operational ramp (Yrs 2–4), and full cash generation phase.</div>
+              </div>
+              <div class="bfc2-panel" id="bfc2-fx">
+                <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;">IRR sensitivity · FX hedging scenario</div>
+                <div class="bfc2-fx-modes">
+                  <div class="bfc2-fx-btn active" onclick="bfc2SetFx('hedged',this)">Fully Hedged</div>
+                  <div class="bfc2-fx-btn" onclick="bfc2SetFx('partial',this)">Partial Hedge</div>
+                  <div class="bfc2-fx-btn" onclick="bfc2SetFx('unhedged',this)">Unhedged</div>
+                </div>
+                <div class="bfc2-chart-wrap"><canvas id="bfc2FxChart"></canvas></div>
+                <div class="bfc2-fx-note" id="bfc2FxNote"></div>
+              </div>
+              <div class="bfc2-panel" id="bfc2-risk">
+                <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;">Risk profile · <span id="bfcRiskMarket2">Kenya</span></div>
+                <div class="bfc-risk-items" id="bfc2RiskItems"></div>
+              </div>
+              <div class="bfc2-panel" id="bfc2-impact">
+                <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:16px;">Indicative impact · per deployment at ticket size</div>
+                <div class="bfc2-impact-grid" id="bfc2ImpactGrid"></div>
+                <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.25);margin-top:12px;margin-bottom:8px;">SDG alignment</div>
+                <div class="bfc2-sdg-row" id="bfc2SdgRow"></div>
+              </div>
+              <div class="bfc-market-strip" id="bfcMarketStrip">
+                <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs1Val">$12B</div><div class="bfc-mstrip-lbl">Annual Finance Gap</div></div>
+                <div class="bfc-mstrip-div"></div>
+                <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs2Val">$4.2B</div><div class="bfc-mstrip-lbl">Private Investment (2023)</div></div>
+                <div class="bfc-mstrip-div"></div>
+                <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs3Val">92%</div><div class="bfc-mstrip-lbl">Renewables Share</div></div>
+                <div class="bfc-mstrip-div"></div>
+                <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs4Val">~2.2×</div><div class="bfc-mstrip-lbl">DFI Leverage Ratio</div></div>
+                <div class="bfc-mstrip-div"></div>
+                <div class="bfc-mstrip-item"><div class="bfc-mstrip-val" id="bfcMs5Val">45 DTAAs</div><div class="bfc-mstrip-lbl">Treaty Coverage</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gloss-tip" id="glossTip"><div class="gt-term" id="glossTerm"></div><div class="gt-def" id="glossDef"></div></div>
+<div id="footer-placeholder"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="assets/js/global.js"></script>
+<script src="assets/js/geo.js"></script>
+<script src="assets/js/bfc.js"></script>
+<script>
+  renderNav('markets.html');
+  renderFooter();
+  initProgNav(['geo'],['Markets']);
+  // Init interactive modules after DOM ready
+  selectCountry('kenya');
+  bfcRenderSectors();
+  bfcUpdate();
+  document.getElementById('bfc2CarbonRow').addEventListener('click',()=>{
+    bfc2CarbonOn=!bfc2CarbonOn;
+    document.getElementById('bfc2Toggle').className='bfc2-toggle'+(bfc2CarbonOn?' on':'');
+    bfcUpdate();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pipeline · TAP I · Transition Africa Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/global.css">
+<style>
+#pipeline{background:var(--cream);}
+.pipe-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+.pipe-criteria{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
+.pc-block{padding:28px 28px 24px;position:relative;}
+.pc-block.mandatory{background:var(--white);border-left:3px solid var(--teal);}
+.pc-block.preferred{background:var(--white);border-left:3px solid var(--gold);}
+.pc-block.exclusion{background:var(--ink);border-left:3px solid #c0392b;}
+.pc-tag{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;}
+.pc-tag.m{color:var(--teal);}
+.pc-tag.p{color:var(--gold);}
+.pc-tag.e{color:#c0392b;}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.pc-list li{font-size:13px;font-weight:300;line-height:1.65;display:flex;align-items:flex-start;gap:10px;}
+.pc-list li::before{content:'';flex-shrink:0;margin-top:8px;width:6px;height:6px;border-radius:50%;}
+.pc-block.mandatory .pc-list li{color:var(--ink);}
+.pc-block.mandatory .pc-list li::before{background:var(--teal);}
+.pc-block.preferred .pc-list li{color:var(--ink);}
+.pc-block.preferred .pc-list li::before{background:var(--gold);}
+.pc-block.exclusion .pc-list li{color:rgba(255,255,255,.5);}
+.pc-block.exclusion .pc-list li::before{background:#c0392b;}
+
+/* Checklist */
+.checklist{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
+.cl-item{display:grid;grid-template-columns:32px 1fr auto;align-items:center;gap:14px;padding:16px 20px;background:var(--white);border:1px solid var(--line);transition:background .2s;}
+.cl-item:hover{background:var(--cream2);}
+.cl-num{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;color:rgba(8,19,28,.25);text-align:center;}
+.cl-text{font-size:13px;font-weight:300;color:var(--ink);line-height:1.55;}
+.cl-badge{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;white-space:nowrap;}
+.cl-badge.req{color:var(--teal);border:1px solid rgba(10,112,112,.3);}
+.cl-badge.pref{color:var(--gold);border:1px solid rgba(192,154,60,.3);}
+
+/* Pipeline signal */
+.pipe-signal{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-top:52px;}
+.ps-stage{background:var(--ink2);padding:24px 20px;position:relative;overflow:hidden;}
+.ps-stage::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.ps-stage.s1::before{background:rgba(192,154,60,.4);}
+.ps-stage.s2::before{background:rgba(10,112,112,.5);}
+.ps-stage.s3::before{background:rgba(74,156,200,.5);}
+.ps-stage.s4::before{background:rgba(76,175,110,.5);}
+.ps-stage-tag{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:10px;}
+.ps-stage-name{font-family:'EB Garamond',serif;font-size:17px;color:#fff;line-height:1.2;margin-bottom:12px;}
+.ps-count{font-family:'EB Garamond',serif;font-size:36px;font-weight:400;line-height:1;}
+.ps-count-lbl{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:3px;}
+
+/* Sector tiles */
+.sector-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:32px;}
+.st{background:var(--ink2);padding:28px 20px;transition:background .2s;}
+.st:hover{background:rgba(255,255,255,.05);}
+.st-icon{font-size:28px;display:block;margin-bottom:14px;}
+.st-name{font-family:'EB Garamond',serif;font-size:19px;font-weight:500;color:#fff;margin-bottom:8px;line-height:1.2;}
+.st-body{font-size:11px;font-weight:300;color:rgba(255,255,255,.3);line-height:1.65;}
+.st-tag{display:inline-block;margin-top:12px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border:1px solid rgba(10,112,112,.35);color:#5CC8C8;}
+
+@media(max-width:960px){
+  .pipe-layout{grid-template-columns:1fr;gap:40px;}
+  .pipe-signal{grid-template-columns:1fr 1fr;}
+  .sector-tiles{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body id="main">
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-vline"></div>
+  <div class="page-hero-inner">
+    <div class="ph-label">TAP I · Pipeline &amp; Criteria</div>
+    <h1>What the Fund<br><em>looks for.</em></h1>
+    <p>TAP I deploys into construction-completion and early-operational stage climate infrastructure with contracted or quasi-contracted revenue streams, structured to satisfy DFI co-financing requirements.</p>
+  </div>
+</div>
+
+<div class="sec-divider light">
+  <span class="sec-divider-num">05</span>
+  <span class="sec-divider-name">Pipeline &amp; Investment Criteria</span>
+  <span class="sec-divider-line"></span>
+  <span class="sec-divider-anchor">Mandatory · Preferred · Exclusions</span>
+</div>
+
+<section id="pipeline">
+  <div class="wrap">
+
+    <div class="pipe-layout">
+      <div class="rv">
+        <div class="s-label">Investment Criteria</div>
+        <h2>What the Fund<br><em>looks for.</em></h2>
+        <p class="s-lead" style="margin-top:14px;">TAP I deploys into construction-completion and early-operational stage climate infrastructure. Every qualifying project must meet mandatory criteria before preferred attributes are assessed.</p>
+
+        <div class="pipe-criteria">
+          <div class="pc-block mandatory">
+            <div class="pc-tag m">Mandatory Criteria · All must be met</div>
+            <ul class="pc-list">
+              <li>Located in a TAP I target jurisdiction with an active Mauritius DTAA</li>
+              <li>Climate-positive or climate-resilient asset — renewable energy, clean water, coastal resilience, or nature-based solutions</li>
+              <li>Contracted or quasi-contracted revenue stream — PPA, water offtake, or FiT with sovereign or investment-grade counterparty</li>
+              <li>Equity ticket between USD 3M and USD 15M per project</li>
+              <li>DFI co-financing available at the senior debt level (IFC, AfDB, Proparco, DEG, FMO, or equivalent)</li>
+              <li>Project sponsor with demonstrated track record in the relevant sector and jurisdiction</li>
+              <li>Willingness to structure under a Mauritius GBC SPV</li>
+            </ul>
+          </div>
+          <div class="pc-block preferred">
+            <div class="pc-tag p">Preferred Attributes · Weighted in scoring</div>
+            <ul class="pc-list">
+              <li>USD or EUR-denominated offtake — reduces currency risk for LP investors</li>
+              <li>MIGA or ATI political risk insurance available or in process</li>
+              <li>Carbon credit revenue potential under VCS or REDD+ frameworks</li>
+              <li>Technical Assistance grant eligibility (GCF, SEFA, bilateral donors)</li>
+              <li>Gender-lens or SDG 5 components embedded in project design</li>
+              <li>Municipal, sovereign, or multilateral off-taker (not single commercial counterparty)</li>
+              <li>Project at construction-completion stage — reduces construction risk significantly</li>
+            </ul>
+          </div>
+          <div class="pc-block exclusion">
+            <div class="pc-tag e">Exclusion List · Absolute</div>
+            <ul class="pc-list">
+              <li>Fossil fuel production, extraction, or refining</li>
+              <li>Coal-fired power generation or coal-related infrastructure</li>
+              <li>Projects with pending IFC PS violations or unresolved community objections</li>
+              <li>Jurisdictions under FATF grey or black list at time of investment</li>
+              <li>Weapons, tobacco, gambling, or adult content</li>
+              <li>Projects with significant involuntary resettlement without IFC PS-compliant RAP</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv d1">
+        <div class="s-label">Qualifying Checklist</div>
+        <h2 style="font-size:clamp(26px,3vw,40px);">Does your project<br><em>qualify?</em></h2>
+        <p class="s-lead" style="margin-top:14px;">Run through this checklist before submitting. Projects that meet all required items are reviewed within 10 business days.</p>
+
+        <div class="checklist">
+          <div class="cl-item"><div class="cl-num">01</div><div class="cl-text">Project is located in Kenya, Rwanda, Namibia, Egypt, Madagascar, or Seychelles</div><div class="cl-badge req">Required</div></div>
+          <div class="cl-item"><div class="cl-num">02</div><div class="cl-text">Asset class is renewable energy, clean water, coastal resilience, or nature-based solutions</div><div class="cl-badge req">Required</div></div>
+          <div class="cl-item"><div class="cl-num">03</div><div class="cl-text">Revenue is contracted or quasi-contracted with a sovereign or investment-grade counterparty</div><div class="cl-badge req">Required</div></div>
+          <div class="cl-item"><div class="cl-num">04</div><div class="cl-text">Equity requirement is between USD 3M and USD 15M</div><div class="cl-badge req">Required</div></div>
+          <div class="cl-item"><div class="cl-num">05</div><div class="cl-text">DFI interest confirmed or in discussion at senior debt level</div><div class="cl-badge req">Required</div></div>
+          <div class="cl-item"><div class="cl-num">06</div><div class="cl-text">Project sponsor has sector and jurisdiction track record</div><div class="cl-badge req">Required</div></div>
+          <div class="cl-item"><div class="cl-num">07</div><div class="cl-text">No fossil fuel, coal, FATF, or IFC PS exclusion list conflicts</div><div class="cl-badge req">Required</div></div>
+          <div class="cl-item"><div class="cl-num">08</div><div class="cl-text">USD or EUR-denominated offtake agreement available</div><div class="cl-badge pref">Preferred</div></div>
+          <div class="cl-item"><div class="cl-num">09</div><div class="cl-text">Political risk insurance (MIGA / ATI) available or in process</div><div class="cl-badge pref">Preferred</div></div>
+          <div class="cl-item"><div class="cl-num">10</div><div class="cl-text">Carbon credit potential — VCS, REDD+, or Article 6 pathway</div><div class="cl-badge pref">Preferred</div></div>
+        </div>
+
+        <div style="margin-top:28px;padding:24px 28px;background:var(--ink);border-left:3px solid var(--gold);">
+          <div style="font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Ready to submit?</div>
+          <p style="font-size:13px;font-weight:300;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:18px;">If your project meets the mandatory criteria above, use the Private Access form to submit a project brief. The investment team responds within 10 business days.</p>
+          <a href="apply.html" class="btn-solid" style="font-size:11px;padding:13px 28px;">Submit a Project →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline signal bar -->
+    <div class="rv" style="margin-top:64px;">
+      <div class="s-label">Current Pipeline Signal</div>
+      <h2 style="font-size:clamp(26px,3vw,40px);">Active<br><em>deal flow</em></h2>
+      <p class="s-lead" style="margin-top:10px;">Pipeline is indicative and subject to change. Figures reflect projects in active assessment as at Q1 2026.</p>
+    </div>
+    <div class="pipe-signal rv d1">
+      <div class="ps-stage s1">
+        <div class="ps-stage-tag">Stage 01 · Initial Review</div>
+        <div class="ps-stage-name">Pipeline<br>Screening</div>
+        <div class="ps-count" style="color:var(--gold);">14</div>
+        <div class="ps-count-lbl">Projects in initial review</div>
+      </div>
+      <div class="ps-stage s2">
+        <div class="ps-stage-tag">Stage 02 · Term Sheet</div>
+        <div class="ps-stage-name">Indicative<br>Term Sheets</div>
+        <div class="ps-count" style="color:#5CC8C8;">6</div>
+        <div class="ps-count-lbl">Term sheets issued</div>
+      </div>
+      <div class="ps-stage s3">
+        <div class="ps-stage-tag">Stage 03 · Due Diligence</div>
+        <div class="ps-stage-name">Active<br>Due Diligence</div>
+        <div class="ps-count" style="color:#4a9cc8;">3</div>
+        <div class="ps-count-lbl">Projects in DD</div>
+      </div>
+      <div class="ps-stage s4">
+        <div class="ps-stage-tag">Stage 04 · IC Approval</div>
+        <div class="ps-stage-name">Investment<br>Committee</div>
+        <div class="ps-count" style="color:#4caf6e;">1</div>
+        <div class="ps-count-lbl">Pending IC approval</div>
+      </div>
+    </div>
+
+    <!-- Sector tiles -->
+    <div class="rv" style="margin-top:64px;">
+      <div class="s-label">Target Sectors</div>
+      <h2 style="font-size:clamp(26px,3vw,40px);">Five climate<br><em>investment themes</em></h2>
+    </div>
+    <div class="sector-tiles rv d1">
+      <div class="st">
+        <span class="st-icon">☀️</span>
+        <div class="st-name">Solar PV &amp; Distributed Energy</div>
+        <p class="st-body">Utility-scale, C&amp;I rooftop, and mini-grid solar. Contracted off-takers preferred. Grid-connected and off-grid.</p>
+        <span class="st-tag">Primary Focus</span>
+      </div>
+      <div class="st">
+        <span class="st-icon">💧</span>
+        <div class="st-name">Clean Water &amp; Sanitation</div>
+        <p class="st-body">Water treatment, distribution, and desalination. Long-tenor municipal or government offtake. SDG 6 aligned.</p>
+        <span class="st-tag">Primary Focus</span>
+      </div>
+      <div class="st">
+        <span class="st-icon">💨</span>
+        <div class="st-name">Wind Energy</div>
+        <p class="st-body">Onshore wind with long-term PPAs. Kenya coast, Namibia, and Egypt's Suez Gulf corridor are priority sites.</p>
+        <span class="st-tag">Active Pipeline</span>
+      </div>
+      <div class="st">
+        <span class="st-icon">🌿</span>
+        <div class="st-name">Nature-Based Solutions</div>
+        <p class="st-body">REDD+, blue carbon, sustainable forestry, and mangrove restoration. VCS/Gold Standard credit revenue blended with ecosystem services fees.</p>
+        <span class="st-tag">Secondary Focus</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="gloss-tip" id="glossTip"><div class="gt-term" id="glossTerm"></div><div class="gt-def" id="glossDef"></div></div>
+<div id="footer-placeholder"></div>
+
+<script src="assets/js/global.js"></script>
+<script>
+  renderNav('pipeline.html');
+  renderFooter();
+  initProgNav(['pipeline'],['Pipeline']);
+</script>
+</body>
+</html>

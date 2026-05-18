@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Engage · TAP I · Transition Africa Partners</title>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@200;300;400;500;600&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/global.css">
+<style>
+#engage{background:var(--cream);}
+.engage-intro{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:52px;}
+.engage-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.e-card{background:var(--white);padding:44px 36px;position:relative;overflow:hidden;transition:background .25s;min-width:0;}
+.e-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .35s;}
+.e-card.a::after{background:var(--gold);}
+.e-card.b::after{background:var(--teal);}
+.e-card.c::after{background:var(--ink);}
+.e-card:hover{background:var(--cream2);}
+.e-card:hover::after{transform:scaleX(1);}
+.e-num{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:rgba(8,19,28,.2);margin-bottom:32px;}
+.e-icon{font-size:32px;margin-bottom:20px;display:block;}
+.e-title{font-family:'EB Garamond',serif;font-size:26px;font-weight:500;color:var(--ink);line-height:1.15;margin-bottom:14px;}
+.e-body{font-size:13px;font-weight:300;color:var(--grey);line-height:1.8;}
+.e-cta{display:inline-flex;align-items:center;gap:10px;margin-top:32px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:gap .2s,border-color .2s;}
+.e-cta:hover{gap:16px;border-color:var(--gold);}
+
+/* FAQ section */
+#faq{background:var(--ink);}
+.faq-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;}
+.faq-list{display:flex;flex-direction:column;gap:0;}
+.faq-item{border-bottom:1px solid rgba(255,255,255,.07);overflow:hidden;}
+.faq-q{font-size:15px;font-weight:400;color:#fff;padding:20px 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;user-select:none;}
+.faq-q:hover{color:var(--gold);}
+.faq-icon{font-size:18px;color:var(--gold);flex-shrink:0;transition:transform .3s;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{font-size:13px;font-weight:300;color:rgba(255,255,255,.4);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;}
+.faq-item.open .faq-a{max-height:300px;padding-bottom:20px;}
+
+@media(max-width:960px){
+  .engage-intro{grid-template-columns:1fr;gap:32px;}
+  .engage-cards{grid-template-columns:1fr;gap:2px;}
+  .e-card{padding:32px 24px;}
+  .faq-layout{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body id="main">
+<div id="nav-placeholder"></div>
+
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-vline"></div>
+  <div class="page-hero-inner">
+    <div class="ph-label">TAP I · How to Engage</div>
+    <h1>Three ways<br>to <em>participate</em></h1>
+    <p>Whether you bring a project, capital, or institutional mandate — there is a structured path for you to engage with the Foundation.</p>
+  </div>
+</div>
+
+<div class="sec-divider light">
+  <span class="sec-divider-num">07</span>
+  <span class="sec-divider-name">How to Engage</span>
+  <span class="sec-divider-line"></span>
+  <span class="sec-divider-anchor">Investors · Co-Financiers · Projects</span>
+</div>
+
+<section id="engage">
+  <div class="wrap">
+    <div class="engage-intro rv">
+      <div>
+        <div class="s-label">How to Engage</div>
+        <h2>Three ways<br>to <em>participate</em></h2>
+      </div>
+      <p class="s-lead">Whether you bring a project, capital, or institutional mandate — there is a structured path for you to engage with the Foundation.</p>
+    </div>
+    <div class="engage-cards">
+      <div class="e-card a rv">
+        <div class="e-num">01</div>
+        <span class="e-icon">◈</span>
+        <div class="e-title">Present a Project</div>
+        <p class="e-body">You are a project sponsor — a conglomerate, public authority, or infrastructure developer — with a climate asset in a target jurisdiction requiring structured institutional co-financing. The Fund reviews construction-completion and early-operational stage projects with contracted or quasi-contracted revenue streams. We structure, de-risk, and deploy equity alongside DFI co-lenders.</p>
+        <a href="apply.html" class="e-cta">Present a project <span>→</span></a>
+      </div>
+      <div class="e-card b rv d1">
+        <div class="e-num">02</div>
+        <span class="e-icon">◉</span>
+        <div class="e-title">Co-Invest with Us</div>
+        <p class="e-body">You are a development finance institution, pension fund, sovereign wealth fund, or ESG-mandated allocator. The Foundation structures each investment as a blended capital stack — combining Fund equity with concessional DFI co-financing to meet your additionality mandate, satisfying IFRS 10 B11 governance requirements.</p>
+        <a href="apply.html" class="e-cta">Request a private briefing <span>→</span></a>
+      </div>
+      <div class="e-card c rv d2">
+        <div class="e-num">03</div>
+        <span class="e-icon">◇</span>
+        <div class="e-title">Become a Dialogue Partner</div>
+        <p class="e-body">You represent a government body, multilateral institution, development bank, law firm, or professional services firm whose mandate intersects with climate transition finance across Africa or the Indian Ocean. Join the institutional dialogue programme and help shape how capital flows into the region.</p>
+        <a href="apply.html" class="e-cta">Explore a partnership <span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="sec-divider">
+  <span class="sec-divider-num">07b</span>
+  <span class="sec-divider-name">Frequently Asked</span>
+  <span class="sec-divider-line"></span>
+  <span class="sec-divider-anchor">Common Questions</span>
+</div>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="faq-layout">
+      <div>
+        <div class="s-label inv" style="margin-bottom:14px;">Common Questions</div>
+        <h2 class="inv" style="font-size:clamp(28px,3vw,44px);">Frequently<br><em>asked</em></h2>
+        <p class="s-lead inv" style="margin-top:14px;">If you have a question not answered here, reach the Foundation's secretariat at <a href="mailto:admin@philanthropicfoundation.net" style="color:var(--gold);">admin@philanthropicfoundation.net</a></p>
+      </div>
+      <div class="faq-list rv">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What is the minimum investment ticket? <span class="faq-icon">+</span></div>
+          <div class="faq-a">The Fund targets equity tickets of USD 3–15M per project, with DFI debt co-financing typically bringing total project values to USD 15–80M. LP commitments to the Fund itself start at USD 5M.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Is the Fund open to non-DFI investors? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Yes. While DFI co-financing is required at the project level, LP investors in the Fund include pension funds, sovereign wealth funds, family offices, and ESG-mandated allocators. The Fund is structured to satisfy IFRS 10 B11 requirements for European institutional investors.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Why is the Fund domiciled in Mauritius? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Mauritius provides 45 Double Taxation Avoidance Agreements covering all target markets, FSC regulatory oversight that European institutional investors recognise, and a GBC structure that allows treaty-protected capital flows. It eliminates 10–30% withholding tax that would otherwise erode LP economics.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How do I submit a project for review? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Use the Project Submission pathway on our Private Access page. You'll be guided through a short eligibility check, project details form, and document checklist. The investment team reviews all submissions within 10 business days.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What sectors does the Fund invest in? <span class="faq-icon">+</span></div>
+          <div class="faq-a">Renewable energy (solar PV, wind, hydro), distributed and off-grid infrastructure, clean water treatment and distribution, coastal resilience, and nature-based solutions including blue carbon and REDD+. Fossil fuel projects are excluded from the mandate.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Is this a public offering? <span class="faq-icon">+</span></div>
+          <div class="faq-a">No. TAP I is a Professional CIS under FSC Mauritius regulation. It is not publicly offered and is accessible only through introduction. All communications are treated as strictly confidential.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gloss-tip" id="glossTip"><div class="gt-term" id="glossTerm"></div><div class="gt-def" id="glossDef"></div></div>
+<div id="footer-placeholder"></div>
+
+<script src="assets/js/global.js"></script>
+<script>
+  renderNav('engage.html');
+  renderFooter();
+  initProgNav(['engage','faq'],['Engage','FAQ']);
+
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    item.classList.toggle('open');
+  }
+</script>
+</body>
+</html>
