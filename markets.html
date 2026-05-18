@@ -10,7 +10,7 @@
 /* ── GEO MAP ── */
 #geo{background:var(--ink2);position:relative;overflow:hidden;padding-top:56px;}
 .geo-wrap{max-width:1400px;margin:0 auto;padding:0 72px;position:relative;z-index:2;}
-.geo-top{display:grid;grid-template-columns:360px 1fr;gap:48px;align-items:start;margin-bottom:0;min-width:0;}
+.geo-top{display:grid;grid-template-columns:340px 1fr;gap:40px;align-items:start;margin-bottom:0;}
 .geo-right-col{display:flex;flex-direction:column;gap:0;min-width:0;overflow:hidden;}
 .geo-derisking-strip{display:flex;gap:2px;margin-bottom:36px;}
 .gds-pill{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);padding:16px 18px;transition:background .2s,border-color .2s;}
@@ -18,7 +18,7 @@
 .gds-pill-title{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
 .gds-pill-body{font-size:11px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.55;}
 .geo-list{display:flex;flex-direction:column;gap:2px;margin-top:32px;}
-.geo-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:14px 18px;border:1px solid rgba(255,255,255,.05);cursor:pointer;transition:all .25s;position:relative;}
+.geo-item{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:14px 18px;border:1px solid rgba(255,255,255,.05);cursor:pointer;transition:all .25s;position:relative;-webkit-tap-highlight-color:transparent;}
 .geo-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:transparent;transition:background .25s;}
 .geo-item:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.1);}
 .geo-item.active{background:rgba(10,112,112,.1);border-color:rgba(10,112,112,.3);}
@@ -103,7 +103,7 @@
 .gppe-ndctext{font-size:11px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.65;margin-top:10px;}
 
 /* BFC Calculator */
-.bfc-inline{margin-top:0;padding-top:80px;border-top:1px solid rgba(255,255,255,.08);}
+.bfc-inline{margin-top:96px;padding-top:64px;border-top:2px solid rgba(192,154,60,.2);}
 .bfc-inline .bfc-header{margin-bottom:24px;flex-direction:column;align-items:flex-start;gap:12px;}
 .bfc-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;gap:32px;flex-wrap:wrap;}
 .bfc-title-block h3{font-family:'EB Garamond',serif;font-size:clamp(26px,3vw,40px);font-weight:400;color:#fff;line-height:1.05;margin-top:8px;}
@@ -131,7 +131,7 @@
 .bfc-sec.active{background:rgba(10,112,112,.12);border-color:rgba(10,112,112,.35);color:#5CC8C8;}
 .bfc-disclaimer{font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:.5px;color:rgba(255,255,255,.15);line-height:1.7;border-top:1px solid rgba(255,255,255,.05);padding-top:16px;margin-top:20px;}
 .bfc-outputs{display:grid;grid-template-rows:auto auto;gap:3px;min-width:0;overflow:hidden;}
-.bfc-kpi-row{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.bfc-kpi-row{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;}
 .bfc-kpi{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);padding:14px 12px;position:relative;overflow:hidden;min-width:0;}
 .bfc-kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .bfc-kpi.k-gold::before{background:linear-gradient(90deg,var(--gold),transparent);}
@@ -139,7 +139,7 @@
 .bfc-kpi.k-blue::before{background:linear-gradient(90deg,#4a9cc8,transparent);}
 .bfc-kpi.k-green::before{background:linear-gradient(90deg,#4caf6e,transparent);}
 .bfc-kpi-label{font-family:'DM Mono',monospace;font-size:7px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.22);margin-bottom:6px;line-height:1.4;}
-.bfc-kpi-val{font-family:'EB Garamond',serif;font-size:clamp(22px,2.5vw,32px);font-weight:400;line-height:1;transition:all .35s;}
+.bfc-kpi-val{font-family:'EB Garamond',serif;font-size:28px;font-weight:400;line-height:1;transition:all .35s;}
 .bfc-kpi-val.gold{color:var(--gold);}
 .bfc-kpi-val.teal{color:#5CC8C8;}
 .bfc-kpi-val.blue{color:#4a9cc8;}
