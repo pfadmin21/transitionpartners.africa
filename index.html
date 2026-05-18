@@ -9,6 +9,18 @@
 <style>
 /* ── HERO ── */
 #hero{height:100vh;min-height:820px;background:var(--ink);display:grid;grid-template-rows:1fr auto;position:relative;overflow:hidden;}
+/* ── SATELLITE BG — drop your image into assets/img/hero-bg.jpg ── */
+.hero-bg-img{position:absolute;inset:0;z-index:0;
+  background:
+    linear-gradient(105deg, rgba(8,19,28,.92) 30%, rgba(8,19,28,.65) 60%, rgba(8,19,28,.45) 100%),
+    url('assets/img/hero-bg.jpg') center center / cover no-repeat;
+}
+/* Fallback glow shown when no image is loaded */
+.hero-bg-img::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 75% 40%,rgba(10,112,112,.18) 0%,transparent 60%),
+             radial-gradient(ellipse 40% 40% at 85% 75%,rgba(192,154,60,.08) 0%,transparent 55%);
+  mix-blend-mode:screen;
+}
 .hero-right{position:absolute;inset:0;z-index:0;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 75% 40%,rgba(10,112,112,.22) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 85% 75%,rgba(192,154,60,.10) 0%,transparent 55%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(10,112,112,.06) 0%,transparent 50%);animation:heroGlow 8s ease-in-out infinite alternate;}
 @keyframes heroGlow{0%{background:radial-gradient(ellipse 70% 60% at 75% 40%,rgba(10,112,112,.22) 0%,transparent 60%),radial-gradient(ellipse 40% 40% at 85% 75%,rgba(192,154,60,.10) 0%,transparent 55%),radial-gradient(ellipse 50% 50% at 20% 80%,rgba(10,112,112,.06) 0%,transparent 50%);}100%{background:radial-gradient(ellipse 65% 65% at 70% 45%,rgba(10,112,112,.28) 0%,transparent 60%),radial-gradient(ellipse 45% 45% at 80% 70%,rgba(192,154,60,.14) 0%,transparent 55%),radial-gradient(ellipse 55% 45% at 25% 75%,rgba(10,112,112,.09) 0%,transparent 50%);}}
 .hero-right::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(10,112,112,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(10,112,112,.08) 1px,transparent 1px);background-size:60px 60px;animation:gridDrift 20s linear infinite;}
@@ -67,6 +79,7 @@ h1 em{font-style:italic;color:var(--gold);}
 
 <!-- HERO -->
 <section id="hero">
+  <div class="hero-bg-img"></div>
   <div class="hero-grid"></div>
   <div class="hero-vline"></div>
   <div class="hero-left">
