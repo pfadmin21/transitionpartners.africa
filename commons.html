@@ -56,7 +56,7 @@
 .dc-features{display:flex;flex-direction:column;gap:2px;margin-top:48px;}
 .dc-feat{display:grid;grid-template-columns:32px 1fr;gap:16px;align-items:start;padding:18px 20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:background .2s;}
 .dc-feat:hover{background:rgba(255,255,255,.06);}
-.dc-feat-icon{font-size:20px;padding-top:2px;}
+.dc-feat-icon{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.08);padding:7px;}
 .dc-feat-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:4px;}
 .dc-feat-body{font-size:12px;font-weight:300;color:rgba(255,255,255,.35);line-height:1.65;}
 
@@ -166,15 +166,27 @@
         <!-- DC Features -->
         <div class="dc-features rv d2">
           <div class="dc-feat">
-            <div class="dc-feat-icon">🛡️</div>
+            <div class="dc-feat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
             <div><div class="dc-feat-title">Tiered by clearance level</div><div class="dc-feat-body">Four tiers: Public, Registered, Restricted (NDA), and Confidential (Qualified Investor). Each folder is independently access-controlled.</div></div>
           </div>
           <div class="dc-feat">
-            <div class="dc-feat-icon">🔏</div>
+            <div class="dc-feat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
             <div><div class="dc-feat-title">Watermarked downloads</div><div class="dc-feat-body">All restricted documents are dynamically watermarked with recipient identity. Download logging is enabled for all tiers.</div></div>
           </div>
           <div class="dc-feat">
-            <div class="dc-feat-icon">⚡</div>
+            <div class="dc-feat-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
             <div><div class="dc-feat-title">Updated in real-time</div><div class="dc-feat-body">The repository is updated as new documents are approved by the Investment Committee and Legal Counsel.</div></div>
           </div>
         </div>

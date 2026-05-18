@@ -18,7 +18,7 @@
 .e-card:hover{background:var(--cream2);}
 .e-card:hover::after{transform:scaleX(1);}
 .e-num{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;color:rgba(8,19,28,.2);margin-bottom:32px;}
-.e-icon{font-size:32px;margin-bottom:20px;display:block;}
+.e-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.08);padding:8px;margin-bottom:20px;}
 .e-title{font-family:'EB Garamond',serif;font-size:26px;font-weight:500;color:var(--ink);line-height:1.15;margin-bottom:14px;}
 .e-body{font-size:13px;font-weight:300;color:var(--grey);line-height:1.8;}
 .e-cta{display:inline-flex;align-items:center;gap:10px;margin-top:32px;font-size:12px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:gap .2s,border-color .2s;}
@@ -77,21 +77,34 @@
     <div class="engage-cards">
       <div class="e-card a rv">
         <div class="e-num">01</div>
-        <span class="e-icon">◈</span>
+        <div class="e-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
         <div class="e-title">Present a Project</div>
         <p class="e-body">You are a project sponsor — a conglomerate, public authority, or infrastructure developer — with a climate asset in a target jurisdiction requiring structured institutional co-financing. The Fund reviews construction-completion and early-operational stage projects with contracted or quasi-contracted revenue streams. We structure, de-risk, and deploy equity alongside DFI co-lenders.</p>
         <a href="apply.html" class="e-cta">Present a project <span>→</span></a>
       </div>
       <div class="e-card b rv d1">
         <div class="e-num">02</div>
-        <span class="e-icon">◉</span>
+        <div class="e-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
+        </div>
         <div class="e-title">Co-Invest with Us</div>
         <p class="e-body">You are a development finance institution, pension fund, sovereign wealth fund, or ESG-mandated allocator. The Foundation structures each investment as a blended capital stack — combining Fund equity with concessional DFI co-financing to meet your additionality mandate, satisfying IFRS 10 B11 governance requirements.</p>
         <a href="apply.html" class="e-cta">Request a private briefing <span>→</span></a>
       </div>
       <div class="e-card c rv d2">
         <div class="e-num">03</div>
-        <span class="e-icon">◇</span>
+        <div class="e-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
         <div class="e-title">Become a Dialogue Partner</div>
         <p class="e-body">You represent a government body, multilateral institution, development bank, law firm, or professional services firm whose mandate intersects with climate transition finance across Africa or the Indian Ocean. Join the institutional dialogue programme and help shape how capital flows into the region.</p>
         <a href="apply.html" class="e-cta">Explore a partnership <span>→</span></a>

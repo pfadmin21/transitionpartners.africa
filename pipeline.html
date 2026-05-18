@@ -55,7 +55,7 @@
 .sector-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:32px;}
 .st{background:var(--ink2);padding:28px 20px;transition:background .2s;}
 .st:hover{background:rgba(255,255,255,.05);}
-.st-icon{font-size:28px;display:block;margin-bottom:14px;}
+.st-icon{display:flex;align-items:center;justify-content:flex-start;margin-bottom:18px;width:44px;height:44px;border:1px solid rgba(255,255,255,.08);padding:8px;}
 .st-name{font-family:'EB Garamond',serif;font-size:19px;font-weight:500;color:#fff;margin-bottom:8px;line-height:1.2;}
 .st-body{font-size:11px;font-weight:300;color:rgba(255,255,255,.3);line-height:1.65;}
 .st-tag{display:inline-block;margin-top:12px;font-family:'DM Mono',monospace;font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border:1px solid rgba(10,112,112,.35);color:#5CC8C8;}
@@ -202,25 +202,46 @@
     </div>
     <div class="sector-tiles rv d1">
       <div class="st">
-        <span class="st-icon">☀️</span>
+        <div class="st-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </div>
         <div class="st-name">Solar PV &amp; Distributed Energy</div>
         <p class="st-body">Utility-scale, C&amp;I rooftop, and mini-grid solar. Contracted off-takers preferred. Grid-connected and off-grid.</p>
         <span class="st-tag">Primary Focus</span>
       </div>
       <div class="st">
-        <span class="st-icon">💧</span>
+        <div class="st-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2C6 2 2 8 2 13a10 10 0 0 0 20 0c0-5-4-11-10-11z"/>
+            <path d="M12 22V13"/><path d="M8 17l4-4 4 4"/>
+          </svg>
+        </div>
         <div class="st-name">Clean Water &amp; Sanitation</div>
         <p class="st-body">Water treatment, distribution, and desalination. Long-tenor municipal or government offtake. SDG 6 aligned.</p>
         <span class="st-tag">Primary Focus</span>
       </div>
       <div class="st">
-        <span class="st-icon">💨</span>
+        <div class="st-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L8 9H2l5 4-2 7 7-5 7 5-2-7 5-4h-6z"/>
+          </svg>
+        </div>
         <div class="st-name">Wind Energy</div>
         <p class="st-body">Onshore wind with long-term PPAs. Kenya coast, Namibia, and Egypt's Suez Gulf corridor are priority sites.</p>
         <span class="st-tag">Active Pipeline</span>
       </div>
       <div class="st">
-        <span class="st-icon">🌿</span>
+        <div class="st-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4caf6e" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 8C8 10 5.9 16.17 3.82 19.82"/><path d="M3.82 19.82C7 17 11 16 14 14c2.5-1.5 4-4 4-8"/>
+            <path d="M3.82 19.82C5 15 8 12 12 10"/>
+          </svg>
+        </div>
         <div class="st-name">Nature-Based Solutions</div>
         <p class="st-body">REDD+, blue carbon, sustainable forestry, and mangrove restoration. VCS/Gold Standard credit revenue blended with ecosystem services fees.</p>
         <span class="st-tag">Secondary Focus</span>
